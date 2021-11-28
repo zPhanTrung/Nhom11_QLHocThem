@@ -134,6 +134,7 @@
     <Content Include="Areas\Admin\Content\all.min.css" />
     <Content Include="Areas\Admin\Content\bootstrap.bundle.min.js" />
     <Content Include="Areas\Admin\Content\demo.js" />
+    <Content Include="Areas\Admin\Content\Image\avatar.png" />
     <Content Include="Areas\Admin\Content\jquery.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -177,7 +178,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\NewFolder1\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
