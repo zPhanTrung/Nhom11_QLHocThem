@@ -121,11 +121,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BienLaiThuHPController.cs" />
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
+    <Compile Include="Areas\Admin\Dao\BienLaiThuHPDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
     <Compile Include="Areas\Admin\Dao\HocSinhDao.cs" />
+    <Compile Include="Areas\Admin\Model\BienLaiThuHP.cs" />
+    <Compile Include="Areas\Admin\Model\BienLaiTraLuong.cs" />
+    <Compile Include="Areas\Admin\Model\BuoiHoc.cs" />
+    <Compile Include="Areas\Admin\Model\CTBienLaiThuHP.cs" />
+    <Compile Include="Areas\Admin\Model\CTBienLaiTraLuong.cs" />
+    <Compile Include="Areas\Admin\Model\DiemDanh.cs" />
+    <Compile Include="Areas\Admin\Model\GiaoVien.cs" />
+    <Compile Include="Areas\Admin\Model\HocSinh_LopHoc.cs" />
     <Compile Include="Areas\Admin\Model\LopHoc.cs" />
     <Compile Include="Areas\Admin\Model\HocSinh.cs" />
+    <Compile Include="Areas\Admin\Model\MienGiam.cs" />
+    <Compile Include="Areas\Admin\Model\MonHoc.cs" />
+    <Compile Include="Areas\Admin\Model\MucThanhToan.cs" />
+    <Compile Include="Areas\Admin\Model\NguoiDung.cs" />
+    <Compile Include="Areas\Admin\Model\NienKhoa.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,6 +170,7 @@
     <Content Include="Areas\Admin\Views\HocSinh\Index.cshtml" />
     <Content Include="Areas\Admin\Views\HocSinh\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HocSinh\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BienLaiThuHP\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
