@@ -20,9 +20,9 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         }
 
         
-        [Route("chitiet")]
         public ActionResult Details(int id)
         {
+            
             return View();
         }
 
@@ -70,19 +70,15 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/Student/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+       
 
         // POST: Admin/Student/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id)
         {
             try
             {
-                // TODO: Add delete logic here
+                HocSinhDao.DeleteHocSinh(id);
 
                 return RedirectToAction("Index");
             }

@@ -25,8 +25,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                
-
                 while (reader.Read())
                 {
                     Type type = typeof(HocSinh);
@@ -40,7 +38,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                             var value = reader[property.Name];
                             if (value != null)
                                 property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
-                                
+
                         }
                         catch { }
                     }
@@ -111,6 +109,20 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                 return false;
             return true;
 
+        }
+
+        public static void DeleteHocSinh(string mahocsinh)
+        {
+            connection = Connection.GetConnection();
+
+            connection.Open();
+            string query = "Delete HocSinh Where MaHocSinh=@MaHocSinh";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@MaHocSinh", mahocsinh);
+
+            command.ExecuteNonQuery();
+            connection.Close();
         }
     }
 }

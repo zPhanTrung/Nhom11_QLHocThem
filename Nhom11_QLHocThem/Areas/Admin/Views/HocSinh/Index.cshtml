@@ -6,7 +6,7 @@
 }
 
 <form method="post" action="/HocSinh/TimKiem" class="d-flex mt-5">
-    <div class="col-8 d-flex row g-3">
+    <div class="col-8 d-flex">
         <div class="col-2">
             <label class="form-label" for="tenhocsinh">Tên học sinh</label>
             <input class="form-control" name="tenhocsinh" id="tenhocsinh" />
@@ -74,7 +74,7 @@
                                 <a class="btn text-success p-0 d-flex" id="edit" href="/Admin/HocSinh/Edit/@item.MaHocSinh">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="/Admin/HocSinh/Edit/@item.MaHocSinh" method="post">
+                                <form action="/Admin/HocSinh/Delete/@item.MaHocSinh" method="post">
                                     <button class="btn text-danger p-0 d-flex" id="delete">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>

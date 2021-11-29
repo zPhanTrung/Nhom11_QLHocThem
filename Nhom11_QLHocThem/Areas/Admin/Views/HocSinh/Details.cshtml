@@ -1,0 +1,40 @@
+﻿@using Nhom11_QLHocThem.Areas.Admin.Model
+@model HocSinh
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div>
+        <label>Mã học sinh: @Model.MaHocSinh</label>
+    </div>
+    <div>
+        <label>Tên học sinh: @Model.TenHocSinh</label>
+    </div>
+    <div>
+        <label>Ngày sinh: @Model.NgaySinh</label>
+    </div>
+    <div>
+        @{
+            if (Model.GioiTinh == true)
+            {
+                <label>Giới tính: Name</label>
+            }
+            else
+            {
+                <label>Giới tính: Nữ</label>
+            }
+        }
+    </div>
+    <div>
+        <label>Địa chỉ: @Model.DiaChi</label>
+    </div>
+    <div>
+        <label>Số điện thoại: @Model.SDT</label>
+    </div>
+    <div>
+        <label>Miễn giảm: @Model.</label>
+    </div>
+</div>
