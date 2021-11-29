@@ -118,14 +118,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Areas\Admin\Controllers\BienLaiThuHPController.cs" />
+=======
+    <Compile Include="Areas\Admin\Controllers\GiaoVienController.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
     <Compile Include="Areas\Admin\Dao\BienLaiThuHPDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
+    <Compile Include="Areas\Admin\Dao\GiaoVienDao.cs" />
     <Compile Include="Areas\Admin\Dao\HocSinhDao.cs" />
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Areas\Admin\Model\BienLaiThuHP - Copy.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Areas\Admin\Model\BienLaiThuHP.cs" />
     <Compile Include="Areas\Admin\Model\BienLaiTraLuong.cs" />
     <Compile Include="Areas\Admin\Model\BuoiHoc.cs" />
@@ -170,7 +180,11 @@
     <Content Include="Areas\Admin\Views\HocSinh\Index.cshtml" />
     <Content Include="Areas\Admin\Views\HocSinh\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HocSinh\Details.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Areas\Admin\Views\BienLaiThuHP\Index.cshtml" />
+=======
+    <Content Include="Areas\Admin\Views\GiaoVien\Index.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -200,6 +214,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
