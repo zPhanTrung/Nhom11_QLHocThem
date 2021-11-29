@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
+using Nhom11_QLHocThem.Areas.Admin.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,40 +8,44 @@ using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 {
-    public class StudentController : Controller
+
+    public class HocSinhController : Controller
     {
-        // GET: Admin/Student
+
         public ActionResult Index()
         {
-            return View();
+            List<HocSinh> model = HocSinhDao.GetAllStudent();
+
+            return View(model);
         }
 
-        // GET: Admin/Student/Details/5
+        
+        [Route("chitiet")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Admin/Student/Create
+        
         public ActionResult Create()
         {
+            ViewBag.MaMienGiam = new List<KeyValuePair<string, int>>() {
+                                    new KeyValuePair<string, int>("1", 10),
+                                    new KeyValuePair<string, int>("2", 15),
+                                    new KeyValuePair<string, int>("3", 20)};
             return View();
         }
 
-        // POST: Admin/Student/Create
+  
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            HocSinhDao.InsertHocSinh(collection);
+            ViewBag.MaMienGiam = new List<KeyValuePair<string, int>>() {
+                                    new KeyValuePair<string, int>("1", 10),
+                                    new KeyValuePair<string, int>("2", 15),
+                                    new KeyValuePair<string, int>("3", 20)};
+            return View();
         }
 
         // GET: Admin/Student/Edit/5
