@@ -7,9 +7,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Model
 {
     public class LopHoc
     {
-        public string MaLopHoc;
-        public string TenLopHoc;
-        public decimal HocPhi1Buoi;
-        public int SoLuongHocSinh;
+        public string MaLopHoc { get; set; }
+        public string TenLopHoc { get; set; }
+        public decimal HocPhi1Buoi { get; set; }
+        public int SoLuongHocSinh { get; set; }
+        public int HocPhiMotBuoi { get; set; }
+        public string MaGiaoVien { get; set; }
+        public string MaMonHoc { get; set; }
+        public string MaNienKhoa { get; set; }
     }
 }
