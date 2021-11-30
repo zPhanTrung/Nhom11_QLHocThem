@@ -125,6 +125,7 @@
     <Compile Include="Areas\Admin\Controllers\BienLaiThuHPController.cs" />
     <Compile Include="Areas\Admin\Controllers\GiaoVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LopHocController.cs" />
     <Compile Include="Areas\Admin\Dao\BienLaiThuHPDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
     <Compile Include="Areas\Admin\Dao\GiaoVienDao.cs" />
@@ -178,6 +179,7 @@
     <Content Include="Areas\Admin\Views\HocSinh\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BienLaiThuHP\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BienLaiThuHP\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\LopHoc\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
