@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
     {
         private static SqlConnection connection;
 
-        public static List<BienLaiThuhHP_HocSinhView> GetAllBienLaiThuHP()
+        public static List<BienLaiThuHP_HocSinhView> GetAllBienLaiThuHP()
         {
             connection = Connection.GetConnection();
             string queryString = "SELECT bl.MaBLThuHP, hs.TenHocSinh, hs.NgaySinh, bl.TongHocPhi, " +
                 "                           bl.NgayThu, bl.ThuChoThangNam, bl.TrangThai " +
                 "                   FROM BienLaiThuHP bl JOIN HocSinh hs ON bl.MaHocSinh = hs.MaHocSinh";
-            List<BienLaiThuhHP_HocSinhView> bienlai = new List<BienLaiThuhHP_HocSinhView>();
+            List<BienLaiThuHP_HocSinhView> bienlai = new List<BienLaiThuHP_HocSinhView>();
             SqlCommand command = new SqlCommand(queryString, connection);
             try
             {
@@ -26,8 +27,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
 
                 while (reader.Read())
                 {
-                    Type type = typeof(BienLaiThuhHP_HocSinhView);
-                    BienLaiThuhHP_HocSinhView obj = (BienLaiThuhHP_HocSinhView)Activator.CreateInstance(type);
+                    Type type = typeof(BienLaiThuHP_HocSinhView);
+                    BienLaiThuHP_HocSinhView obj = (BienLaiThuHP_HocSinhView)Activator.CreateInstance(type);
                     PropertyInfo[] properties = obj.GetType().GetProperties();
 
                     foreach (PropertyInfo property in properties)

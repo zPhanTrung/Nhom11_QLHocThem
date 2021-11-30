@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
+using Nhom11_QLHocThem.Areas.Admin.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,8 +27,9 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            
-            return View();
+            List<HocSinh> model = HocSinhDao.GetAllStudent();
+
+            return View(model);
         }
 
 
