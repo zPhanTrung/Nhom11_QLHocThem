@@ -118,13 +118,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BienLaiThuHPController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GiaoVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
     <Compile Include="Areas\Admin\Dao\BienLaiThuHPDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
+    <Compile Include="Areas\Admin\Dao\GiaoVienDao.cs" />
     <Compile Include="Areas\Admin\Dao\HocSinhDao.cs" />
     <Compile Include="Areas\Admin\Model\BienLaiThuHP.cs" />
     <Compile Include="Areas\Admin\Model\BienLaiTraLuong.cs" />
@@ -200,6 +203,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\GiaoVien\" />
+    <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
