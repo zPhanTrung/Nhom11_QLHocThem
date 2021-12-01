@@ -4,9 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<div class="container">
-    <div class="pay-bill">
+<h2>Biên lai trả lương</h2>
+
+<div class="container mt-3">
+    <div class="btn btn-primary">
+        <a style="text-decoration:none" class="text-light" href="/Admin/BienLaiTraLuong/Create">
+            Thêm
+        </a>
+    </div>
+    <div class="pay-bill mt-3">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -39,8 +45,8 @@
                             <td class="text-info">Sửa</td>
                             <td class="text-info">Xóa</td>
                         </tr>
-                        }
                     }
+                }
             </tbody>
         </table>
     </div>
