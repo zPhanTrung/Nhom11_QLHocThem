@@ -123,11 +123,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BienLaiThuHPController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BienLaiTraLuongController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuoiHocController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiemDanhController.cs" />
     <Compile Include="Areas\Admin\Controllers\GiaoVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
     <Compile Include="Areas\Admin\Dao\BienLaiThuHPDao.cs" />
+    <Compile Include="Areas\Admin\Dao\BienLaiTraLuongDao.cs" />
     <Compile Include="Areas\Admin\Dao\BuoiHocDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
     <Compile Include="Areas\Admin\Dao\DiemDanhDao.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Areas\Admin\Model\CTBienLaiTraLuong.cs" />
     <Compile Include="Areas\Admin\Model\DiemDanh.cs" />
     <Compile Include="Areas\Admin\Model\DTO\BienLaiThuHP_HocSinhView.cs" />
+    <Compile Include="Areas\Admin\Model\DTO\BLTraLuong_GiaoVien.cs" />
     <Compile Include="Areas\Admin\Model\DTO\BuoiHoc_DiemDanhView.cs" />
     <Compile Include="Areas\Admin\Model\DTO\DiemDanhView.cs" />
     <Compile Include="Areas\Admin\Model\GiaoVien.cs" />
@@ -186,6 +189,10 @@
     <Content Include="Areas\Admin\Views\BuoiHoc\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DiemDanh\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DiemDanh\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GiaoVien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\BienLaiTraLuong\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BienLaiTraLuong\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -215,7 +222,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\GiaoVien\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
