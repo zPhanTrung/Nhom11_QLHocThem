@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Nhom11_QLHocThem.Areas.Admin.DTO.LopHocDTO>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenLopHoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongHocSinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HocPhiMotBuoi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenMonHoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNienKhoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamHoc)
+        </th>
+        <th>Xử lý</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLopHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongHocSinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocPhiMotBuoi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenMonHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNienKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamHoc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+
