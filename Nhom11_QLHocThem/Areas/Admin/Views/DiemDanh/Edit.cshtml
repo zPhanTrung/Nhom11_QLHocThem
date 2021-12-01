@@ -1,0 +1,117 @@
+﻿
+@using Nhom11_QLHocThem.Areas.Admin.Model.DTO
+@model List<DiemDanhView>
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" action="/HocSinh/TimKiem" class="d-flex mt-5">
+    <div class="col-8 d-flex">
+        <div class="col-2">
+            <label class="form-label" for="malophoc">Tên học sinh</label>
+            <input class="form-control" name="malophoc" id="malophoc" />
+        </div>
+        <div class="align-self-end">
+            <button class="btn btn-secondary d-flex">
+                <i class="far fa-search p-0"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<form method="post" >
+    <div class="mb-3 mt-3">
+        <button class="btn btn-secondary" onclick="history.back()">Quay lại</button>
+        <button class="btn btn-primary" formaction="/Admin/DiemDanh/Edit/@ViewBag.MaBuoiHoc">Lưu</button>
+    </div>
+    
+    <div class="d-flex justify-content-end">
+        <label class="col-2">Mã lớp học: <span>@ViewBag.MaLopHoc</span></label>
+        <label class="col-2">Tên lớp học: <span>@ViewBag.TenLopHoc</span></label>
+        <label class="col-2">Giáo viên: <span>@ViewBag.TenGiaoVien</span></label>
+        <label class="col-2">Số lượng học sinh: <span>@Model[0].SoLuongHocSinh</span></label>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mã học sinh</th>
+                <th scope="col">Tên học sinh</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Ghi chú</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                int i = 0;
+                foreach (var item in Model)
+                {
+                    i++;
+
+                    var year = item.NgaySinh.Year.ToString();
+                    var month = item.NgaySinh.Month;
+                    var day = item.NgaySinh.Day;
+                    var _month = month.ToString();
+                    var _day = day.ToString();
+                    if (month < 10)
+                    {
+                        _month = "0" + _month;
+                    }
+                    if (day < 10)
+                    {
+                        _day = "0" + _day;
+                    }
+                    var ngaysinh = _day + "/" + _month + "/" + year;
+
+
+                    <tr class="user-select-none">
+                        <td>@i</td>
+
+                        <td>@item.MaHocSinh</td>
+                        <td>@item.TenHocSinh</td>
+                        <td>@ngaysinh</td>
+                        <td class="col-1">
+                            <input class="form-control" name="ghichu-@item.MaHocSinh" />
+                        </td>
+                        <td class="col-2">
+                            <div class="d-flex">
+                                <input class="visually-hidden" name="tichvang-@item.MaHocSinh" value="false" />
+                                <a class="btn btn-success me-3  ms-3" id="tichvang">
+                                    Tích vắng
+                                </a>
+                                <a class="btn btn-danger me-3 ms-3 visually-hidden" id="huy">
+                                    Hủy
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+</form>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("a#tichvang").click(function () {
+                $("tr").removeClass("bg-secondary  bg-opacity-50")
+                $(this).parent().parent().parent().addClass("bg-secondary  bg-opacity-50")
+                $(this).addClass("visually-hidden")
+                $(this).next().removeClass("visually-hidden")
+                $(this).prev("input").val("true")
+            })
+
+            $("a#huy").click(function () {
+                $(this).addClass("visually-hidden")
+                $(this).prev().removeClass("visually-hidden")
+                $(this).prev("input").val("false")
+            })
+        })
+    </script>
+}
+

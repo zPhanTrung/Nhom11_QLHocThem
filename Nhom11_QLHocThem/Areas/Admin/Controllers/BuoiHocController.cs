@@ -1,5 +1,6 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
 using Nhom11_QLHocThem.Areas.Admin.Model;
+using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,17 @@ using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 {
-    public class BienLaiThuHPController : Controller
+    public class BuoiHocController : Controller
     {
+        // GET: Admin/BuoiHoc
         public ActionResult Index()
         {
-            
-
-            return View();
+            LopHoc lophoc = LopHocDao.GetAllLopHoc().FirstOrDefault();
+            List<BuoiHoc> model = BuoiHocDao.GetAllBuoiHoc("T1");
+            ViewBag.MaLopHoc = "T1";
+            ViewBag.TenGiaoVien = GiaoVienDao.GetGiaoVien(lophoc.MaGiaoVien).TenGiaoVien;
+            ViewBag.TenLopHoc = LopHocDao.GetLopHoc("T1").TenLopHoc;
+            return View(model);
         }
 
 
@@ -24,23 +29,16 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             return View();
         }
 
-
-        public ActionResult Create()
-        {
-            List<HocSinh> model = HocSinhDao.GetAllStudent();
-
-            return View(model);
-        }
-
-
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-           
-            return View();
+            BuoiHocDao.InsertBuoiHoc(collection);
+
+            return RedirectToAction("Index");
         }
 
- 
+
+
         public ActionResult Edit(int id)
         {
             return View();
@@ -67,7 +65,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             try
             {
-                
+
 
                 return RedirectToAction("Index");
             }
@@ -75,14 +73,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             {
                 return View();
             }
-        }
-
-        [HttpPost]
-        public ActionResult Check(string nam, string thang)
-        {
-            if(BienLaiThuHPDao.CheckExistBienLai(nam, thang))
-                return Json(new { result = "Đã tạo" }, JsonRequestBehavior.AllowGet);
-            return Json(new { result ="Chưa tạo" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

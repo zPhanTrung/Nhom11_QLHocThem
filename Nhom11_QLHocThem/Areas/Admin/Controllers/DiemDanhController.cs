@@ -1,5 +1,6 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
 using Nhom11_QLHocThem.Areas.Admin.Model;
+using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,13 @@ using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 {
-    public class BienLaiThuHPController : Controller
+    public class DiemDanhController : Controller
     {
+        // GET: Admin/DiemDanh
         public ActionResult Index()
         {
-            
-
             return View();
         }
-
 
         public ActionResult Details(int id)
         {
@@ -24,41 +23,31 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             return View();
         }
 
-
-        public ActionResult Create()
-        {
-            List<HocSinh> model = HocSinhDao.GetAllStudent();
-
-            return View(model);
-        }
-
-
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-           
-            return View();
+            return RedirectToAction("Index");
         }
 
- 
+
+
         public ActionResult Edit(int id)
         {
-            return View();
+            List<DiemDanhView> model = DiemDanhDao.GetBangDiemDanh(id);
+            ViewBag.MaLopHoc = BuoiHocDao.FindById(id).MaLopHoc;
+            LopHoc lophoc = LopHocDao.GetLopHoc(ViewBag.MaLopHoc);
+            ViewBag.TenLopHoc = lophoc.TenLopHoc;
+            ViewBag.TenGiaoVien = GiaoVienDao.GetGiaoVien(lophoc.MaGiaoVien).TenGiaoVien;
+            ViewBag.MaBuoiHoc = id;
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
+            DiemDanhDao.UpdateDiemDanh(id, collection);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectPermanent("Admin/BuoiHoc");
         }
 
 
@@ -67,7 +56,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             try
             {
-                
+
 
                 return RedirectToAction("Index");
             }
@@ -75,14 +64,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             {
                 return View();
             }
-        }
-
-        [HttpPost]
-        public ActionResult Check(string nam, string thang)
-        {
-            if(BienLaiThuHPDao.CheckExistBienLai(nam, thang))
-                return Json(new { result = "Đã tạo" }, JsonRequestBehavior.AllowGet);
-            return Json(new { result ="Chưa tạo" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

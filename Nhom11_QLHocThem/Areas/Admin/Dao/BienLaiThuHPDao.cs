@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Dao
 {
@@ -50,6 +51,29 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
             { }
 
             return bienlai;
+        }
+
+        public static bool CheckExistBienLai(string nam, string thang)
+        {
+            connection = Connection.GetConnection();
+            connection.Open();
+            string date = nam + "-" + thang + "-" + "1";
+            string query = "SELECT * FROM BienLaiThuHP bl WHERE bl.ThuChoThangNam=@date";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@date", date);
+
+            var rs = command.ExecuteScalar();
+            connection.Close();
+
+            if (rs != null)
+                return true;
+            return false;
+        }
+
+        public static void InsertBienLai(FormCollection collection)
+        {
+
         }
     }
 }

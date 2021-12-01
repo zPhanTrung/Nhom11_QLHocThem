@@ -14,8 +14,42 @@
 <form method="post" action="/HocSinh/TimKiem" class="d-flex mt-5">
     <div class="col-8 d-flex">
         <div class="col-2">
-            <label class="form-label" for="tenhocsinh">Tên học sinh</label>
-            <input class="form-control" name="tenhocsinh" id="tenhocsinh" />
+            <label class="form-label" for="mabienlai">Mã biên lai</label>
+            <input class="form-control" name="mabienlai" id="mabienlai" />
+        </div>
+        <div class="col-2">
+            <label class="form-label" for="mabienlai">Tháng-Năm</label>
+            <div class="d-flex">
+                <select class="form-control" name="thang" id="thang-search">
+                    @{
+                        <option value="1" selected>01</option>
+                        for (int j = 2; j <= 12; j++)
+                        {
+                            if (j < 10)
+                            {
+                                var x = "0" + j;
+                                <option value="@j">@x</option>
+                            }
+                            else
+                            {
+                                <option value="@j">@j</option>
+                            }
+                        }
+                    }
+
+                </select>
+                <select class="form-control" name="nam" id="nam-search">
+                    @{
+                        var yearNow = DateTime.Now.Year;
+                        <option value="@yearNow" selected>@yearNow</option>
+                        for (int j = yearNow - 1; j > yearNow - 10; j--)
+                        {
+                            <option value="@j">@j</option>
+                        }
+                    }
+
+                </select>
+            </div>
         </div>
         <div class="align-self-end">
             <button class="btn btn-secondary d-flex">
@@ -25,12 +59,65 @@
     </div>
 </form>
 
-<form action="/Admin/HocSinh/Create" method="get" class="d-flex">
-    <button class="btn btn-primary d-flex mb-4 mt-3">
-        <div>Thêm học sinh</div>
+<form method="post" class="d-flex">
+    <button class="btn btn-primary d-flex mb-4 mt-3" onclick="return false" data-bs-toggle="modal" data-bs-target="#create" id="createBienLai">
+        <div>Tạo biên lai</div>
     </button>
-</form>
+    <div class="modal fade" id="create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tạo biên lai</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col">
+                        <label class="form-label" for="thangnam">Thu cho Tháng-Năm</label>
+                        <div class="d-flex">
+                            <select class="form-control" name="thang" id="thang">
+                                @{
+                                    <option value="1" selected>01</option>
+                                    for (int j = 2; j <= 12; j++)
+                                    {
+                                        if (j < 10)
+                                        {
+                                            var x = "0" + j;
+                                            <option value="@j">@x</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@j">@j</option>
+                                        }
+                                    }
+                                }
 
+                            </select>
+                            <select class="form-control" name="nam" id="nam">
+                                @{
+                                    var year = DateTime.Now.Year;
+                                    <option value="@year" selected>@year</option>
+                                    for (int j = year - 1; j > year - 10; j--)
+                                    {
+                                        <option value="@j">@j</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="trangthai">Trạng thái</label>
+                        <input class="form-control" readonly name="trangthai" id="trangthai" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button class="btn btn-primary" formaction="/BienLaiThuHP/Create">Tạo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <table class="table table-bordered">
     <thead>
@@ -46,57 +133,100 @@
             <th scope="col"></th>
         </tr>
     </thead>
-    @{
-        int i = 0;
-        foreach (var item in Model)
-        {
-            i++;
-            <tbody>
-                <tr class="user-select-none">
-                    <td>@i</td>
-                    <td>@item.MaHocSinh</td>
-                    <td>@item.TenHocSinh</td>
-                    @if (item.NgaySinh == null)
-                    {
-                        <td>NULL</td>
-                    }
-                    else
-                    {
-                        <td>@item.NgaySinh.ToShortDateString()</td>
-                    }
-                    @{
-                        if (item.GioiTinh == true)
+    @*@{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tbody>
+                    <tr class="user-select-none">
+                        <td>@i</td>
+                        <td>@item.MaHocSinh</td>
+                        <td>@item.TenHocSinh</td>
+                        @if (item.NgaySinh == null)
                         {
-                            <td>Nam</td>
+                            <td>NULL</td>
                         }
                         else
                         {
-                            <td>Nữ</td>
+                            <td>@item.NgaySinh.ToShortDateString()</td>
                         }
-                    }
+                        @{
+                            if (item.GioiTinh == true)
+                            {
+                                <td>Nam</td>
+                            }
+                            else
+                            {
+                                <td>Nữ</td>
+                            }
+                        }
 
-                    <td>@item.DiaChi</td>
-                    <td>
-                        <div class="d-flex justify-content-around">
-                            <a class="btn text-success p-0 d-flex" id="edit" href="/Admin/HocSinh/Edit/@item.MaHocSinh">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="/Admin/HocSinh/Delete/@item.MaHocSinh" method="post">
-                                <button class="btn text-danger p-0 d-flex" id="delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </div>
+                        <td>@item.DiaChi</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <a class="btn text-success p-0 d-flex" id="edit" href="/Admin/HocSinh/Edit/@item.MaHocSinh">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="/Admin/HocSinh/Delete/@item.MaHocSinh" method="post">
+                                    <button class="btn text-danger p-0 d-flex" id="delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
 
-                    </td>
-                </tr>
-            </tbody>
-        }
-    }
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        }*@
 
 </table>
 
 
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#createBienLai").click(function () {
+                var _thang = $("#thang").val()
+                var _nam = $("#nam").val()
+                $.post("/Admin/BienLaiThuHP/Check",
+                    {
+                        thang: _thang, nam: _nam
+                    },
+                    function (data, status) {
+                        $("#trangthai").val(data.result)
+                    }
+                )
+            })
+            $("#thang").change(function () {
+                var _thang = $(this).val()
+                var _nam = $("#nam").val()
+                $.post("/Admin/BienLaiThuHP/Check",
+                    {
+                        thang:_thang, nam:_nam
+                    },
+                    function (data, status) {
+                        $("#trangthai").val(data.result)
+                    }
+                )
+            })
+            $("#nam").change(function () {
+                var thang = $("#thang").val()
+                var nam = $(this).val()
+                $.post("/Admin/BienLaiThuHP/Check",
+                    {
+                        thang: _thang, nam: _nam
+                    },
+                    function (data, status) {
+                        $("#trangthai").val(data.result)
+                    }
+                )
+            })
+
+        })
+    </script>
+}
 
 
 

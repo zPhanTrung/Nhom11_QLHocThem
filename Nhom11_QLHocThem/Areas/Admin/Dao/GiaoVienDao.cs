@@ -11,6 +11,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
     public class GiaoVienDao
     {
         private static SqlConnection connection;
+
         public static List<GiaoVien> GetAllTeacher()
         {
             connection = Connection.GetConnection();
@@ -48,5 +49,50 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
 
             return giaoviens;
         }
+
+
+        public static GiaoVien GetGiaoVien(string magiaovien)
+        {
+            connection = Connection.GetConnection();
+            string queryString = "SELECT * FROM GiaoVien WHERE GiaoVien.MaGiaoVien = @magiaovien";
+            GiaoVien giaovien = new GiaoVien();
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@magiaovien", magiaovien);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Type type = typeof(GiaoVien);
+                    GiaoVien obj = (GiaoVien)Activator.CreateInstance(type);
+                    PropertyInfo[] properties = obj.GetType().GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        try
+                        {
+                            var value = reader[property.Name];
+                            if (value != null)
+                                property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
+
+                        }
+                        catch { }
+                    }
+                    giaovien = obj;
+                }
+                reader.Close();
+            }
+            catch
+            { }
+            return giaovien;
+        }
+        
+
+
+
     }
+
+
+    
 }

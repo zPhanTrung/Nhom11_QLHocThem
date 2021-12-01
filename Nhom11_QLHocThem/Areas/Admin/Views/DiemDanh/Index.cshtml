@@ -1,0 +1,83 @@
+﻿
+@using Nhom11_QLHocThem.Areas.Admin.Model.DTO
+@model List<BuoiHoc_DiemDanhView>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" action="/HocSinh/TimKiem" class="d-flex mt-5">
+    <div class="col-8 d-flex">
+        <div class="col-2">
+            @{
+                var year = DateTime.Now.Year.ToString();
+                var month = DateTime.Now.Month;
+                var day = DateTime.Now.Day;
+                var _month = month.ToString();
+                var _day = day.ToString();
+                if (month < 10)
+                {
+                    _month = "0" + _month;
+                }
+                if (day < 10)
+                {
+                    _day = "0" + _day;
+                }
+                var date = year + "-" + _month + "-" + _day;
+            }
+            <label class="form-label" for="ngayhoc">Ngày học</label>
+            <input class="form-control" type="date" name="ngayhoc" id="ngayhoc" value="@date" />
+        </div>
+
+        <div class="align-self-end">
+            <button class="btn btn-secondary d-flex">
+                <i class="far fa-search p-0"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Mã lớp</th>
+            <th scope="col">Tên lớp</th>
+            <th scope="col">Môn học</th>
+            <th scope="col">Giáo viên</th>
+            <th scope="col">Số lượng học sinh</th>
+            <th scope="col">Vắng</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @*@{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tbody>
+                    <tr class="user-select-none">
+                        <td>@i</td>
+                        <td>@item.NgayHoc</td>
+                        <td>@item.ThoiGian</td>
+
+                    </tr>
+                </tbody>
+            }
+        }*@
+
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+        })
+    </script>
+}
+
+
+
