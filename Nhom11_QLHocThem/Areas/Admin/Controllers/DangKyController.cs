@@ -1,5 +1,5 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
-using Nhom11_QLHocThem.Areas.Admin.DTO;
+using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 
         public ActionResult List_Class()
         {
-            List<LopHocDTO> dao = LopHocDAO.List_Class_DTO();
+            List<LopHocDTO> dao = LopHocDao.List_Class_DTO();
             return View(dao);
         }
         public ActionResult List_DK()

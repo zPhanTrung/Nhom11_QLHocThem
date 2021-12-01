@@ -125,6 +125,7 @@
     <Compile Include="Areas\Admin\Controllers\BienLaiThuHPController.cs" />
     <Compile Include="Areas\Admin\Controllers\BienLaiTraLuongController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuoiHocController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DangKyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiemDanhController.cs" />
     <Compile Include="Areas\Admin\Controllers\GiaoVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Areas\Admin\Dao\BienLaiTraLuongDao.cs" />
     <Compile Include="Areas\Admin\Dao\BuoiHocDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
+    <Compile Include="Areas\Admin\Dao\DangKyDAO.cs" />
     <Compile Include="Areas\Admin\Dao\DiemDanhDao.cs" />
     <Compile Include="Areas\Admin\Dao\GiaoVienDao.cs" />
     <Compile Include="Areas\Admin\Dao\HocSinhDao.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Areas\Admin\Model\DTO\BLTraLuong_GiaoVien.cs" />
     <Compile Include="Areas\Admin\Model\DTO\BuoiHoc_DiemDanhView.cs" />
     <Compile Include="Areas\Admin\Model\DTO\DiemDanhView.cs" />
+    <Compile Include="Areas\Admin\Model\DTO\LopHocDTO.cs" />
     <Compile Include="Areas\Admin\Model\GiaoVien.cs" />
     <Compile Include="Areas\Admin\Model\HocSinh_LopHoc.cs" />
     <Compile Include="Areas\Admin\Model\LopHoc.cs" />
@@ -193,6 +196,9 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\BienLaiTraLuong\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BienLaiTraLuong\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DangKy\List_Class.cshtml" />
+    <Content Include="Areas\Admin\Views\DangKy\List_DK.cshtml" />
+    <Content Include="Areas\Admin\Views\DangKy\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
