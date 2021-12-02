@@ -47,7 +47,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             DiemDanhDao.UpdateDiemDanh(id, collection);
 
-            return RedirectPermanent("Admin/BuoiHoc");
+            return RedirectPermanent("/Admin/BuoiHoc");
         }
 
 
