@@ -142,6 +142,7 @@
     <Compile Include="Areas\Admin\Model\DiemDanh.cs" />
     <Compile Include="Areas\Admin\Model\DTO\BienLaiThuHP_HocSinhView.cs" />
     <Compile Include="Areas\Admin\Model\DTO\BuoiHoc_DiemDanhView.cs" />
+    <Compile Include="Areas\Admin\Model\DTO\CTBienLaiThuHPView.cs" />
     <Compile Include="Areas\Admin\Model\DTO\DiemDanhView.cs" />
     <Compile Include="Areas\Admin\Model\GiaoVien.cs" />
     <Compile Include="Areas\Admin\Model\HocSinh_LopHoc.cs" />
@@ -186,6 +187,9 @@
     <Content Include="Areas\Admin\Views\BuoiHoc\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DiemDanh\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DiemDanh\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BienLaiThuHP\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BienLaiThuHP\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HocSinh\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

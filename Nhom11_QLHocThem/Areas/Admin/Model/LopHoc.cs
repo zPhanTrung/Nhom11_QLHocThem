@@ -18,11 +18,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Model
         public string MaGiaoVien { get; set; }
         public string MaMonHoc { get; set; }
         public string MaNienKhoa { get; set; }
-        public DateTime NgayBatDau { get; set; }
-        public DateTime NgayKetThuc { get; set; }
-        public DateTime NgayBatDauDangKy { get; set; }
-        public DateTime NgayKetThucDangKy { get; set; }
-
 
     }
 }

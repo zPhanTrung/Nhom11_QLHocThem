@@ -1,0 +1,83 @@
+﻿
+@using Nhom11_QLHocThem.Areas.Admin.Model.DTO
+@model List<CTBienLaiThuHPView>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<form method="post" action="/HocSinh/TimKiem" class="d-flex mt-5">
+    <div class="col-8 d-flex">
+        <div class="col-2">
+            <label class="form-label" for="malophoc">Mã lớp học</label>
+            <input class="form-control" name="malophoc" id="malophoc" />
+        </div>
+        <div class="align-self-end">
+            <button class="btn btn-secondary d-flex">
+                <i class="far fa-search p-0"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="d-flex justify-content-end">
+    <label class="col-2">Mã học sinh: @ViewBag.MaHocSinh</label>
+    <label class="col-2">Tên học sinh: @ViewBag.TenHocSinh</label>
+    <label class="col-2">Ngày sinh: @ViewBag.NgaySinh</label>
+    <label class="col-2">Tổng học phí: @ViewBag.TongHocPhi</label>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Mã lớp học</th>
+            <th scope="col">Tên lớp học</th>
+            <th scope="col">Tổng số buổi</th>
+            <th scope="col">Học phí 1 buổi</th>
+            <th scope="col">Thành tiền</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                
+                <tr class="user-select-none">
+                    <td>@i</td>
+                    <td>@item.MaLopHoc</td>
+                    <td>@item.TenLopHoc</td>
+                    <td>@item.TongSoBuoi</td>
+                    <td>@item.HocPhi1Buoi</td>
+                    <td>@item.ThanhTien</td>
+                    <td class="col-2">
+                        <div class="d-flex">
+                            <a class="btn btn-success me-3  ms-3" id="edit" href="/Admin/DiemDanh/Details/@item.MaLopHoc">
+                                <i class="fal fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        }
+    </tbody>
+    </table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            
+
+        })
+    </script>
+}
+
+
+
+

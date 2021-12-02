@@ -1,5 +1,6 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
 using Nhom11_QLHocThem.Areas.Admin.Model;
+using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +13,21 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
     {
         public ActionResult Index()
         {
-            
 
-            return View();
+            List<BienLaiThuHP_HocSinhView> model = BienLaiThuHPDao.GetAllBienLaiThuHP();
+            return View(model);
         }
 
 
         public ActionResult Details(int id)
         {
-
-            return View();
-        }
-
-
-        public ActionResult Create()
-        {
-            List<HocSinh> model = HocSinhDao.GetAllStudent();
-
+            BienLaiThuHP bienlai = BienLaiThuHPDao.GetBienLaiThuHP(id);
+            ViewBag.MaHocSinh = bienlai.MaHocSinh;
+            HocSinh hocsinh = HocSinhDao.GetHocSinh(ViewBag.MaHocSinh);
+            ViewBag.TenHocSinh = hocsinh.TenHocSinh;
+            ViewBag.NgaySinh = hocsinh.NgaySinh.ToShortDateString();
+            ViewBag.TongHocPhi = bienlai.TongHocPhi;
+            List<CTBienLaiThuHPView> model = BienLaiThuHPDao.GetCTBienLaiThuHP(id);
             return View(model);
         }
 
@@ -36,8 +35,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-           
-            return View();
+            BienLaiThuHPDao.InsertBienLai(collection);
+            return RedirectToAction("Index");
         }
 
  

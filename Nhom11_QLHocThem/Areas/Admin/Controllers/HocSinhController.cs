@@ -49,18 +49,24 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         }
 
         // GET: Admin/Student/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            ViewBag.MaMienGiam = new List<KeyValuePair<string, int>>() {
+                                    new KeyValuePair<string, int>("1", 10),
+                                    new KeyValuePair<string, int>("2", 15),
+                                    new KeyValuePair<string, int>("3", 20)};
+            HocSinh model = HocSinhDao.GetHocSinh(id);
+
+            return View(model);
         }
 
-        // POST: Admin/Student/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
+                HocSinhDao.UpdateHocSinh(collection);
 
                 return RedirectToAction("Index");
             }

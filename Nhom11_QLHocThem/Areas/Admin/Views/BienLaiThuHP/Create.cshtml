@@ -1,0 +1,130 @@
+﻿
+@using Nhom11_QLHocThem.Areas.Admin.Model
+@model List<BienLaiThuHP>
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<form method="post" action="/HocSinh/TimKiem" class="d-flex mt-5">
+    <div class="col-8 d-flex">
+        <div class="col-2">
+            <label class="form-label" for="malophoc">Mã lớp học</label>
+            <input class="form-control" name="malophoc" id="malophoc" />
+        </div>
+        <div class="align-self-end">
+            <button class="btn btn-secondary d-flex">
+                <i class="far fa-search p-0"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="d-flex justify-content-end">
+    <label class="col-2">Mã học sinh: <span id="malophoc-span">@ViewBag.MaHocSinh</span></label>
+    <label class="col-2">Tên học sinh: <span id="tenlophoc-span">@ViewBag.TenHocSinh</span></label>
+    <label class="col-2">Ngày sinh: <span id="tengiaovien-span">@ViewBag.NgaySinh</span></label>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Mã lớp học</th>
+            <th scope="col">Tên lớp học</th>
+            <th scope="col">Tổng số buổi</th>
+            <th scope="col">Học phí 1 buổi</th>
+            <th scope="col">Thành ti</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            i++;
+            var trangthai = "Chưa học";
+            if (item.NgayHoc < DateTime.Now)
+            {
+                trangthai = "Đã học";
+            }
+            var year = item.NgayHoc.Year.ToString();
+            var month = item.NgayHoc.Month;
+            var day = item.NgayHoc.Day;
+            var _month = month.ToString();
+            var _day = day.ToString();
+            if (month < 10)
+            {
+                _month = "0" + _month;
+            }
+            if (day < 10)
+            {
+                _day = "0" + _day;
+            }
+            var ngayhoc = _day + "/" + _month + "/" + year;
+            <tbody>
+                <tr class="user-select-none">
+                    <td>@i</td>
+                    <td>@ngayhoc</td>
+                    <td id="thoigian">@item.ThoiGian</td>
+                    <td>@item.SoLuongHocSinh</td>
+                    <td>@item.Vang</td>
+                    <td>@trangthai</td>
+                    <td class="col-2">
+                        <div class="d-flex">
+                            <a class="btn btn-success me-3  ms-3" id="edit" href="/Admin/DiemDanh/Edit/@item.MaBuoiHoc">
+                                Điểm danh
+                            </a>
+                            <form action="/Admin/BuoiHoc/Delete/@item.MaBuoiHoc" method="post">
+                                <button class="btn btn-danger d-flex" id="delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    }
+
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#createBuoiHoc").click(function () {
+
+                $("#malophoc-create").val($("#malophoc-span").text())
+                $("#tenlophoc-create").val($("#tenlophoc-span").text())
+
+                var thoigian = $("#thoigian").first().text()
+                const thoigian_arr = thoigian.split("-")
+                const thoigianbd = thoigian_arr[0].split("h")
+                const thoigiankt = thoigian_arr[1].split("h")
+
+                $("#thoigian-bd").val(thoigianbd[0] + ":" + thoigianbd[1])
+                $("#thoigian-kt").val(thoigiankt[0] + ":" + thoigiankt[1])
+
+            })
+
+            $("#create").click(function () {
+
+                var x = $("input#thoigian-bd").val()
+                var y = $("input#thoigian-kt").val()
+                const _x = x.split(":")
+                const _y = y.split(":")
+                $("#thoigian-input").val(_x[0] + "h" + _x[1] + "-" + _y[0] + "h" + _y[1])
+                console.log($("#thoigian-input").val())
+            })
+
+        })
+    </script>
+}
+
+
+

@@ -124,5 +124,45 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
             command.ExecuteNonQuery();
             connection.Close();
         }
+
+        public static HocSinh GetHocSinh(string mahocsinh)
+        {
+            connection = Connection.GetConnection();
+            string queryString = "Select * from HocSinh hs WHERE hs.MaHocSinh=@mahocsinh";
+            HocSinh hocsinh = new HocSinh();
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@mahocsinh", mahocsinh);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Type type = typeof(HocSinh);
+                    HocSinh obj = (HocSinh)Activator.CreateInstance(type);
+                    PropertyInfo[] properties = obj.GetType().GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        try
+                        {
+                            var value = reader[property.Name];
+                            if (value != null)
+                                property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
+
+                        }
+                        catch { }
+                    }
+                    hocsinh = obj;
+                }
+                reader.Close();
+            }
+            catch
+            { }
+
+            return hocsinh;
+        }
     }
 }
