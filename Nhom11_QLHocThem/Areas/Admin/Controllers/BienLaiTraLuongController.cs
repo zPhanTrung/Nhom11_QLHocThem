@@ -21,7 +21,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         // GET: Admin/BienLaiTraLuong/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<CTTraLuong_LopHoc> ct_bienlaitraluong = BienLaiTraLuongDao.GetBienLaiTraLuong(id);
+            return View(ct_bienlaitraluong);
         }
 
         // GET: Admin/BienLaiTraLuong/Create

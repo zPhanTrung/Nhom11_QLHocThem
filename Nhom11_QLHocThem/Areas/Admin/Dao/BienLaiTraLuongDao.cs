@@ -54,6 +54,47 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
 
             return bienlaitraluongs;
         }
+
+        public static List<CTTraLuong_LopHoc> GetBienLaiTraLuong(int id)
+        {
+            connection = Connection.GetConnection();
+            string queryString = "SELECT lh.MaLopHoc, lh.TenLopHoc, ct.TongSoBuoi, ct.Luong1Buoi, ct.ThanhTien " +
+                "FROM CTBienLaiTraLuong ct, LopHoc lh " +
+                "WHERE lh.MaLopHoc = ct.MaLopHoc AND ct.MaBLTraLuong = " + id;
+            List<CTTraLuong_LopHoc> ctbienlaitraluongs = new List<CTTraLuong_LopHoc>();
+            SqlCommand command = new SqlCommand(queryString, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Type type = typeof(CTTraLuong_LopHoc);
+                    CTTraLuong_LopHoc obj = (CTTraLuong_LopHoc)Activator.CreateInstance(type);
+                    PropertyInfo[] properties = obj.GetType().GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        try
+                        {
+                            var value = reader[property.Name];
+                            if (value != null)
+                                property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
+
+                        }
+                        catch { }
+                    }
+                    ctbienlaitraluongs.Add(obj);
+                }
+                reader.Close();
+            }
+            catch
+            { }
+
+            return ctbienlaitraluongs;
+        }
+
         public static bool InsertBienLaiTraLuong(FormCollection collection)
         {
             connection = Connection.GetConnection();

@@ -1,10 +1,12 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Dao
 {
@@ -87,9 +89,34 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
             { }
             return giaovien;
         }
-        
 
 
+        public static bool InsertGiaoVien(FormCollection collection)
+        {
+            connection = Connection.GetConnection();
+
+            connection.Open();
+            SqlCommand command = new SqlCommand("P_AddGiaoVien", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@MaGiaoVien", collection["magiaovien"]);
+            command.Parameters.AddWithValue("@TenGiaoVien", collection["tengiaovien"]);
+            command.Parameters.AddWithValue("@NgaySinh", collection["ngaysinh"]);
+            command.Parameters.AddWithValue("@GioiTinh", collection["gioitinh"]);
+            command.Parameters.AddWithValue("@DiaChi", collection["diachi"]);
+            command.Parameters.AddWithValue("@SDT", collection["sdt"]);
+            command.Parameters.AddWithValue("@MaMonHoc", collection["mamonhoc"]);
+            command.Parameters.AddWithValue("@MaMTT", collection["mamtt"]);
+
+            if (collection["taikhoan"] != "")
+                command.Parameters.AddWithValue("@TaiKhoanNganHang", collection["sdt"]);
+
+            int rs = command.ExecuteNonQuery();
+            connection.Close();
+            if (rs > 0)
+                return false;
+            return true;
+        }
 
     }
 

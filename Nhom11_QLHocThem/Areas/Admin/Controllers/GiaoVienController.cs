@@ -35,7 +35,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                GiaoVienDao.InsertGiaoVien(collection);
 
                 return RedirectToAction("Index");
             }

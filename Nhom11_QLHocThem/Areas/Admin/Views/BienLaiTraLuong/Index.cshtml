@@ -41,9 +41,12 @@
                             <td>@item.TraChoThangNam</td>
                             <td>@item.TrangThai</td>
                             <td>@item.TongLuong</td>
-                            <td class="text-info">Chi tiết</td>
-                            <td class="text-info">Sửa</td>
-                            <td class="text-info">Xóa</td>
+                            <td class="text-info">
+                                <a style="text-decoration:none" class="text-light btn btn-info" href="/Admin/BienLaiTraLuong/Details/@item.MaBLTraLuong">
+                                    Chi tiết
+                                </a>
+                            </td>
+                            <td class="text-info btn btn-danger">Xóa</td>
                         </tr>
                     }
                 }
