@@ -22,6 +22,16 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Search(string malophoc)
+        {
+            LopHoc lophoc = LopHocDao.GetLopHoc(malophoc);
+            List<BuoiHoc> model = BuoiHocDao.GetAllBuoiHoc(malophoc);
+            ViewBag.MaLopHoc = lophoc.MaLopHoc;
+            ViewBag.TenGiaoVien = GiaoVienDao.GetGiaoVien(lophoc.MaGiaoVien).TenGiaoVien;
+            ViewBag.TenLopHoc = lophoc.TenLopHoc;
+            return View("Index", model);
+        }
 
         public ActionResult Details(int id)
         {
