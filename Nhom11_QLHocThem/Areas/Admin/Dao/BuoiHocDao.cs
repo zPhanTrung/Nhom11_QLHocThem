@@ -14,7 +14,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
     public class BuoiHocDao
     {
         private static SqlConnection connection;
-        public static List<BuoiHoc> GetAllBuoiHoc(string malophoc)
+        public static List<BuoiHoc> GetBuoiHocByMaLop(string malophoc)
         {
             connection = Connection.GetConnection();
             string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, bh.Vang"+
@@ -105,11 +105,65 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                             var value = reader[property.Name];
                             if (value != null)
                                 property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
-
                         }
                         catch { }
                     }
                     buoihoc = obj;
+                }
+                reader.Close();
+            }
+            catch
+            { }
+
+            return buoihoc;
+        }
+
+        public static List<BuoiHoc> SearchBuoiHoc(FormCollection collection)
+        {
+            var malophoc = collection["malophoc"];
+
+            connection = Connection.GetConnection();
+            SqlCommand command;
+            if (malophoc != "" && malophoc != null)
+            {
+                string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, bh.Vang" +
+                                  " FROM BuoiHoc bh" +
+                                  " WHERE bh.MaLopHoc = @malophoc";
+                command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@malophoc", malophoc);
+            }
+            else
+            {
+                string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, bh.Vang" +
+                                  " FROM BuoiHoc bh";
+                command = new SqlCommand(queryString, connection);
+            }
+
+            List<BuoiHoc> buoihoc = new List<BuoiHoc>();
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Type type = typeof(BuoiHoc);
+                    BuoiHoc obj = (BuoiHoc)Activator.CreateInstance(type);
+                    PropertyInfo[] properties = obj.GetType().GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        try
+                        {
+                            var value = reader[property.Name];
+                            if (value != null)
+                                property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
+
+                        }
+                        catch { }
+                    }
+                    buoihoc.Add(obj);
                 }
                 reader.Close();
             }

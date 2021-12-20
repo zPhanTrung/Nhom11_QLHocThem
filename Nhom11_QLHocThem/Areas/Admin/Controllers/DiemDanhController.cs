@@ -30,7 +30,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         }
 
 
-
         public ActionResult Edit(int id)
         {
             List<DiemDanhView> model = DiemDanhDao.GetBangDiemDanh(id);
@@ -41,6 +40,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             ViewBag.MaBuoiHoc = id;
             return View(model);
         }
+
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)

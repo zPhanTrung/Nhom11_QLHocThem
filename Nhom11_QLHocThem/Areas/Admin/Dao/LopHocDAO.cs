@@ -50,7 +50,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
             return lophocs;
         }
 
-        public static LopHoc GetLopHoc(string malophoc)
+        public static LopHoc GetLopHocByMaLop(string malophoc)
         {
             connection = Connection.GetConnection();
             string queryString = "SELECT * FROM LopHoc WHERE LopHoc.MaLopHoc=@malophoc";
