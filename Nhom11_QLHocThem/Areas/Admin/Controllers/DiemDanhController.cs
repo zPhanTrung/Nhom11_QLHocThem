@@ -30,7 +30,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         }
 
 
-
         public ActionResult Edit(int id)
         {
             List<DiemDanhView> model = DiemDanhDao.GetBangDiemDanh(id);
@@ -42,12 +41,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             DiemDanhDao.UpdateDiemDanh(id, collection);
 
-            return RedirectPermanent("Admin/BuoiHoc");
+            return RedirectPermanent("/Admin/BuoiHoc");
         }
 
 

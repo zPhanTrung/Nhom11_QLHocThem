@@ -1,5 +1,6 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
 using Nhom11_QLHocThem.Areas.Admin.Model;
+using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,34 +9,35 @@ using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 {
-    public class GiaoVienController : Controller
+    public class BienLaiTraLuongController : Controller
     {
-        // GET: Admin/GiaoVien
+        // GET: Admin/BienLaiTraLuong
         public ActionResult Index()
         {
-            List<GiaoVien> ds_giaovien = GiaoVienDao.GetAllTeacher();
-            return View(ds_giaovien);
+            List<BLTraLuong_GiaoVien> ds_bienlaitraluong = BienLaiTraLuongDao.GetAllBienLaiTraLuong();
+            return View(ds_bienlaitraluong);
         }
 
-        // GET: Admin/GiaoVien/Details/5
+        // GET: Admin/BienLaiTraLuong/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<CTTraLuong_LopHoc> ct_bienlaitraluong = BienLaiTraLuongDao.GetBienLaiTraLuong(id);
+            return View(ct_bienlaitraluong);
         }
 
-        // GET: Admin/GiaoVien/Create
+        // GET: Admin/BienLaiTraLuong/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/GiaoVien/Create
+        // POST: Admin/BienLaiTraLuong/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
-                GiaoVienDao.InsertGiaoVien(collection);
+                BienLaiTraLuongDao.InsertBienLaiTraLuong(collection);
 
                 return RedirectToAction("Index");
             }
@@ -45,13 +47,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/GiaoVien/Edit/5
+        // GET: Admin/BienLaiTraLuong/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/GiaoVien/Edit/5
+        // POST: Admin/BienLaiTraLuong/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -67,13 +69,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/GiaoVien/Delete/5
+        // GET: Admin/BienLaiTraLuong/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Admin/GiaoVien/Delete/5
+        // POST: Admin/BienLaiTraLuong/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

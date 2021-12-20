@@ -1,4 +1,5 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Model;
+using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,15 +11,17 @@ using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Dao
 {
-    public class GiaoVienDao
+    public class BienLaiTraLuongDao
     {
         private static SqlConnection connection;
 
-        public static List<GiaoVien> GetAllTeacher()
+        public static List<BLTraLuong_GiaoVien> GetAllBienLaiTraLuong()
         {
             connection = Connection.GetConnection();
-            string queryString = "Select * from GiaoVien";
-            List<GiaoVien> giaoviens = new List<GiaoVien>();
+            string queryString = "SELECT MaBLTraLuong, TenGiaoVien, NgayTra, " +
+                "TraChoThangNam, TrangThai, TongLuong FROM BienLaiTraLuong bl, GiaoVien gv " +
+                "WHERE bl.MaGiaoVien = gv.MaGiaoVien";
+            List<BLTraLuong_GiaoVien> bienlaitraluongs = new List<BLTraLuong_GiaoVien>();
             SqlCommand command = new SqlCommand(queryString, connection);
             try
             {
@@ -27,8 +30,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
 
                 while (reader.Read())
                 {
-                    Type type = typeof(GiaoVien);
-                    GiaoVien obj = (GiaoVien)Activator.CreateInstance(type);
+                    Type type = typeof(BLTraLuong_GiaoVien);
+                    BLTraLuong_GiaoVien obj = (BLTraLuong_GiaoVien)Activator.CreateInstance(type);
                     PropertyInfo[] properties = obj.GetType().GetProperties();
 
                     foreach (PropertyInfo property in properties)
@@ -42,32 +45,33 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                         }
                         catch { }
                     }
-                    giaoviens.Add(obj);
+                    bienlaitraluongs.Add(obj);
                 }
                 reader.Close();
             }
             catch
             { }
 
-            return giaoviens;
+            return bienlaitraluongs;
         }
 
-
-        public static GiaoVien GetGiaoVien(string magiaovien)
+        public static List<CTTraLuong_LopHoc> GetBienLaiTraLuong(int id)
         {
             connection = Connection.GetConnection();
-            string queryString = "SELECT * FROM GiaoVien WHERE GiaoVien.MaGiaoVien = @magiaovien";
-            GiaoVien giaovien = new GiaoVien();
+            string queryString = "SELECT lh.MaLopHoc, lh.TenLopHoc, ct.TongSoBuoi, ct.Luong1Buoi, ct.ThanhTien " +
+                "FROM CTBienLaiTraLuong ct, LopHoc lh " +
+                "WHERE lh.MaLopHoc = ct.MaLopHoc AND ct.MaBLTraLuong = " + id;
+            List<CTTraLuong_LopHoc> ctbienlaitraluongs = new List<CTTraLuong_LopHoc>();
             SqlCommand command = new SqlCommand(queryString, connection);
-            command.Parameters.AddWithValue("@magiaovien", magiaovien);
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+
                 while (reader.Read())
                 {
-                    Type type = typeof(GiaoVien);
-                    GiaoVien obj = (GiaoVien)Activator.CreateInstance(type);
+                    Type type = typeof(CTTraLuong_LopHoc);
+                    CTTraLuong_LopHoc obj = (CTTraLuong_LopHoc)Activator.CreateInstance(type);
                     PropertyInfo[] properties = obj.GetType().GetProperties();
 
                     foreach (PropertyInfo property in properties)
@@ -81,35 +85,28 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                         }
                         catch { }
                     }
-                    giaovien = obj;
+                    ctbienlaitraluongs.Add(obj);
                 }
                 reader.Close();
             }
             catch
             { }
-            return giaovien;
+
+            return ctbienlaitraluongs;
         }
 
-
-        public static bool InsertGiaoVien(FormCollection collection)
+        public static bool InsertBienLaiTraLuong(FormCollection collection)
         {
             connection = Connection.GetConnection();
 
             connection.Open();
-            SqlCommand command = new SqlCommand("P_AddGiaoVien", connection);
+            SqlCommand command = new SqlCommand("P_AddBLTraLuong", connection);
             command.CommandType = CommandType.StoredProcedure;
 
+            command.Parameters.AddWithValue("@NgayTra", collection["ngaytra"]);
+            command.Parameters.AddWithValue("@Trachothangnam", collection["trachothangnam"].ToString());
+            command.Parameters.AddWithValue("@TrangThai", 0);
             command.Parameters.AddWithValue("@MaGiaoVien", collection["magiaovien"]);
-            command.Parameters.AddWithValue("@TenGiaoVien", collection["tengiaovien"]);
-            command.Parameters.AddWithValue("@NgaySinh", collection["ngaysinh"]);
-            command.Parameters.AddWithValue("@GioiTinh", collection["gioitinh"]);
-            command.Parameters.AddWithValue("@DiaChi", collection["diachi"]);
-            command.Parameters.AddWithValue("@SDT", collection["sdt"]);
-            command.Parameters.AddWithValue("@MaMonHoc", collection["mamonhoc"]);
-            command.Parameters.AddWithValue("@MaMTT", collection["mamtt"]);
-
-            if (collection["taikhoan"] != "")
-                command.Parameters.AddWithValue("@TaiKhoanNganHang", collection["sdt"]);
 
             int rs = command.ExecuteNonQuery();
             connection.Close();
@@ -117,9 +114,5 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                 return false;
             return true;
         }
-
     }
-
-
-    
 }

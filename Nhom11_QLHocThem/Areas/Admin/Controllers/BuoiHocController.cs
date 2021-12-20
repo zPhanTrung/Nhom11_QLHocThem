@@ -12,14 +12,23 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
     public class BuoiHocController : Controller
     {
         // GET: Admin/BuoiHoc
-        public ActionResult Index()
+        public ActionResult Index(FormCollection collection, int Page = 1)
         {
-            LopHoc lophoc = LopHocDao.GetAllLopHoc().FirstOrDefault();
-            List<BuoiHoc> model = BuoiHocDao.GetAllBuoiHoc("T1");
-            ViewBag.MaLopHoc = "T1";
+            var lophoc = LopHocDao.GetLopHocByMaLop(collection["malophoc"]);
+            ViewBag.MaLopHoc = lophoc.MaLopHoc;
             ViewBag.TenGiaoVien = GiaoVienDao.GetGiaoVien(lophoc.MaGiaoVien).TenGiaoVien;
-            ViewBag.TenLopHoc = LopHocDao.GetLopHoc("T1").TenLopHoc;
-            return View(model);
+            ViewBag.TenLopHoc = lophoc.TenLopHoc;
+
+            var rs = BuoiHocDao.SearchBuoiHoc(collection);
+            int lenght = rs.ToList().Count;
+            if (lenght % 10 > 0)
+                ViewBag.PageNumber = lenght / 10 + 1;
+            else
+                ViewBag.PageNumber = lenght / 10;
+            ViewBag.CurrentPage = Page;
+            var model = rs.ToList().Skip((Page - 1) * 10);
+            model = model.Take(10);
+            return View(model.ToList());
         }
 
 
@@ -37,8 +46,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-
-
         public ActionResult Edit(int id)
         {
             return View();
@@ -49,7 +56,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             try
             {
-                // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }

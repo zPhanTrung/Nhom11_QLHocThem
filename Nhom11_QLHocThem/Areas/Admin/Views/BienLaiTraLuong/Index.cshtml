@@ -1,0 +1,56 @@
+﻿@using Nhom11_QLHocThem.Areas.Admin.Model.DTO
+@model List<BLTraLuong_GiaoVien>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Biên lai trả lương</h2>
+
+<div class="container mt-3">
+    <div class="btn btn-primary">
+        <a style="text-decoration:none" class="text-light" href="/Admin/BienLaiTraLuong/Create">
+            Thêm
+        </a>
+    </div>
+    <div class="pay-bill mt-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã biên lai</th>
+                    <th scope="col">Tên giáo viên</th>
+                    <th scope="col">Ngày trả</th>
+                    <th scope="col">Trả cho tháng năm</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                    foreach (var item in Model)
+                    {
+                        i++;
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@item.MaBLTraLuong</td>
+                            <td>@item.TenGiaoVien</td>
+                            <td>@item.NgayTra</td>
+                            <td>@item.TraChoThangNam</td>
+                            <td>@item.TrangThai</td>
+                            <td>@item.TongLuong</td>
+                            <td class="text-info">
+                                <a style="text-decoration:none" class="text-light btn btn-info" href="/Admin/BienLaiTraLuong/Details/@item.MaBLTraLuong">
+                                    Chi tiết
+                                </a>
+                            </td>
+                            <td class="text-info btn btn-danger">Xóa</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

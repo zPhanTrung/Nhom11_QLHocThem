@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Cập nhật thông tin</h2>
+<div class="container">
+    <div class="row">
+        <div class="left col">
+            <form method="post" action="/Admin/GiaoVien/Create">
+                <div class="form-group">
+                    <label for="magiaovien">Mã giáo viên:</label>
+                    <input type="text" class="form-control" id="magiaovien" name="magiaovien" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="tengiaovien">Họ tên:</label>
+                    <input type="text" class="form-control" id="tengiaovien" name="tengiaovien" placeholder="Nguyễn Xuân A">
+                </div>
+                <div class="form-group">
+                    <label for="ngaysinh">Ngày sinh </label>
+                    <input type="date" name="ngaysinh">
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label for="">Giới tính</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gioitinh" id="nam"
+                               value="Nam">
+                        <label class="form-check-label" for="nam">Nam</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gioitinh" id="nu"
+                               value="Nữ">
+                        <label class="form-check-label" for="nu">Nữ</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="diachi">Địa chỉ:</label>
+                    <input type="text" class="form-control" id="diachi" name="diachi" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="sdt">Số điện thoại:</label>
+                    <input type="text" class="form-control" id="sdt" name="sdt" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="mamonhoc">Môn học</label>
+                    <select class="form-control" id="mamonhoc" name="mamonhoc">
+                        <option value="1">Toán</option>
+                        <option value="2">Văn</option>
+                        <option value="3">Anh</option>
+                        <option value="4">Lý</option>
+                        <option value="5">Hóa</option>
+                        <option value="6">Sinh</option>
+                        <option value="7">Sử</option>
+                        <option value="8">Địa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mamtt">Mức thanh toán</label>
+                    <select class="form-control" id="mamtt" name="mamtt">
+                        <option value="1">MTT01</option>
+                        <option value="2">MTT02</option>
+                        <option value="3 ">MTT03</option>
+                    </select>
+                </div>
+                <div class="add mt-4">
+                    <button type="submit" class="btn btn-primary mb-2">Thêm</button>
+                </div>
+            </form>
+        </div>
+        <div class="right col">
+
+        </div>
+    </div>
+</div>
+

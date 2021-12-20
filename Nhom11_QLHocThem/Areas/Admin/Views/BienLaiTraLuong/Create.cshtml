@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Tạo biên lai</h2>
+
+<div class="container">
+    <div class="pay row">
+        <div class="content_left col">
+            <form method="post" action="/Admin/BienLaiTraLuong/Create">
+                <div class="form-group">
+                    <label for="magiaovien">Mã giáo viên:</label>
+                    <select class="form-control" id="magiaovien" name="magiaovien">
+                        <option value="1">GV001</option>
+                        <option value="2">GV002</option>
+                        <option value="3">GV004</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ngaytra" id="date-payment">Ngày thanh toán: </label>
+                    <input class="form-control" type="date" name="ngaytra">
+                </div>
+                <div class="form-group">
+                    <label for="trachothangnam">Thanh toán tháng năm: </label>
+                    <input class="form-control" type="date" name="trachothangnam">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2 mt-4">Tạo biên lai</button>
+            </form>
+        </div>
+        <div class="content_right col ml-4 pl-4">
+            @*<div class="info">
+                <div class="employee">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Mã lớp</th>
+                                <th scope="col">Số buổi</th>
+                                <th scope="col">Tổng lương</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>LH01</td>
+                                <td>8</td>
+                                <td>8.000.000</td>
+                                <td class="text-info">Chi tiết</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>LH02</td>
+                                <td>9</td>
+                                <td>6.000.000</td>
+                                <td class="text-info">Chi tiết</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>LH03</td>
+                                <td>8</td>
+                                <td>7.000.000</td>
+                                <td class="text-info">Chi tiết</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>*@
+        </div>
+    </div>
+</div>
+
