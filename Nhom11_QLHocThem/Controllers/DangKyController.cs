@@ -1,43 +1,41 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
 using Nhom11_QLHocThem.Areas.Admin.Model;
-using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Nhom11_QLHocThem.Areas.Admin.Controllers
+namespace Nhom11_QLHocThem.Controllers
 {
-    public class BienLaiTraLuongController : Controller
+    public class DangKyController : Controller
     {
-        // GET: Admin/BienLaiTraLuong
+        // GET: DangKy
         public ActionResult Index()
         {
-            List<BLTraLuong_GiaoVien> ds_bienlaitraluong = BienLaiTraLuongDao.GetAllBienLaiTraLuong();
-            return View(ds_bienlaitraluong);
+            List<LopHoc> lst = LopHocDao.GetAllLopHoc();
+            return View(lst);
         }
 
-        // GET: Admin/BienLaiTraLuong/Details/5
+        // GET: DangKy/Details/5
         public ActionResult Details(int id)
         {
-            List<CTTraLuong_LopHoc> ct_bienlaitraluong = BienLaiTraLuongDao.GetBienLaiTraLuong(id);
-            return View(ct_bienlaitraluong);
+            return View();
         }
 
-        // GET: Admin/BienLaiTraLuong/Create
+        // GET: DangKy/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/BienLaiTraLuong/Create
+        // POST: DangKy/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
-                BienLaiTraLuongDao.InsertBienLaiTraLuong(collection);
+                
 
                 return RedirectToAction("Index");
             }
@@ -47,13 +45,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/BienLaiTraLuong/Edit/5
+        // GET: DangKy/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/BienLaiTraLuong/Edit/5
+        // POST: DangKy/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -69,13 +67,19 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/BienLaiTraLuong/Delete/5
-        [HttpPost]
+        // GET: DangKy/Delete/5
         public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: DangKy/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                BienLaiTraLuongDao.DeleteBLTraLuong(id);
+                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

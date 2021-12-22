@@ -13,7 +13,7 @@
         </a>
     </div>
     <div class="pay-bill mt-3">
-        <table class="table table-striped">
+        <table class="table table-striped text-center">
             <thead>
                 <tr>
                     <th scope="col">STT</th>
@@ -29,26 +29,37 @@
             </thead>
             <tbody>
                 @{
-                    int i = 0;
-                    foreach (var item in Model)
+                    if (Model != null)
                     {
-                        i++;
-                        <tr>
-                            <th scope="row">@i</th>
-                            <td>@item.MaBLTraLuong</td>
-                            <td>@item.TenGiaoVien</td>
-                            <td>@item.NgayTra</td>
-                            <td>@item.TraChoThangNam</td>
-                            <td>@item.TrangThai</td>
-                            <td>@item.TongLuong</td>
-                            <td class="text-info">
-                                <a style="text-decoration:none" class="text-light btn btn-info" href="/Admin/BienLaiTraLuong/Details/@item.MaBLTraLuong">
-                                    Chi tiết
-                                </a>
-                            </td>
-                            <td class="text-info btn btn-danger">Xóa</td>
-                        </tr>
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@item.MaBLTraLuong</td>
+                                <td>@item.TenGiaoVien</td>
+                                <td>@item.NgayTra.ToShortDateString()</td>
+                                <td>@item.TraChoThangNam</td>
+                                <td>@item.TrangThai</td>
+                                <td>@item.TongLuong</td>
+                                <td class="text-info">
+                                    <a style="text-decoration:none" class="text-light btn btn-info btn-sm" href="/Admin/BienLaiTraLuong/Details/@item.MaBLTraLuong">
+                                        Chi tiết
+                                    </a>
+                                </td>
+
+                                <td class="text-info">
+                                    <form action="/Admin/BienLaiTraLuong/Delete/@item.MaBLTraLuong" method="post">
+                                        <button class="text-light btn btn-danger btn-sm">
+                                            Xóa
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
                     }
+
                 }
             </tbody>
         </table>
