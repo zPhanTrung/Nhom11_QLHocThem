@@ -18,7 +18,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             ViewBag.MaLopHoc = lophoc.MaLopHoc;
             ViewBag.TenGiaoVien = GiaoVienDao.GetGiaoVien(lophoc.MaGiaoVien).TenGiaoVien;
             ViewBag.TenLopHoc = lophoc.TenLopHoc;
-
+            ViewBag.MaLopHoc_Search = collection["malophoc"];
+            ViewBag.TenGiaoVien_Search = collection["tengiaovien"];
             var rs = BuoiHocDao.SearchBuoiHoc(collection);
             int lenght = rs.ToList().Count;
             if (lenght % 10 > 0)
@@ -41,6 +42,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            var x = collection["thu2"];
+
             BuoiHocDao.InsertBuoiHoc(collection);
 
             return RedirectToAction("Index");

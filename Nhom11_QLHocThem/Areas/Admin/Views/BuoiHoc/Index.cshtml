@@ -2,19 +2,19 @@
 @using Nhom11_QLHocThem.Areas.Admin.Model
 @model List<BuoiHoc>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Buổi học";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<form method="post" action="/Admin/BuoiHoc/Search" class="d-flex mt-5">
+<h3>Buổi học</h3>
+<form method="post" action="/Admin/BuoiHoc" class="d-flex mt-5 flex-column">
     <div class="col-8 d-flex">
         <div class="col-2">
             <label class="form-label" for="malophoc">Mã lớp học</label>
-            <input class="form-control" name="malophoc" id="malophoc" />
+            <input class="form-control" name="malophoc" id="malophoc" value="@ViewBag.MaLopHoc_Search"/>
         </div>
         <div class="col-2">
             <label class="form-label" for="tengiaovien">Tên giáo viên</label>
-            <input class="form-control" name="tengiaovien" id="tengiaovien" />
+            <input class="form-control" name="tengiaovien" id="tengiaovien" value="@ViewBag.TenGiaoVien_Search"/>
         </div>
         <div class="align-self-end">
             <button class="btn btn-secondary d-flex">
@@ -22,12 +22,138 @@
             </button>
         </div>
     </div>
+
+    <div>
+        <button class="btn btn-primary d-flex mb-4 mt-3" onclick="return false" data-bs-toggle="modal" data-bs-target="#create" id="createBuoiHoc">
+            <div>Thêm buổi học</div>
+        </button>
+    </div>
+    
+
+
+    <div class="d-flex justify-content-end">
+        <label class="col-2">Mã lớp học: <span id="malophoc-span">@ViewBag.MaLopHoc</span></label>
+        <label class="col-2">Tên lớp học: <span id="tenlophoc-span">@ViewBag.TenLopHoc</span></label>
+        <label class="col-2">Giáo viên: <span id="tengiaovien-span">@ViewBag.TenGiaoVien</span></label>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ngày học</th>
+                <th scope="col">Thời gian</th>
+                <th scope="col">Số lượng học sinh</th>
+                <th scope="col">Vắng</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                var trangthai = "Chưa học";
+                if (item.NgayHoc < DateTime.Now)
+                {
+                    trangthai = "Đã học";
+                }
+                var year = item.NgayHoc.Year.ToString();
+                var month = item.NgayHoc.Month;
+                var day = item.NgayHoc.Day;
+                var _month = month.ToString();
+                var _day = day.ToString();
+                if (month < 10)
+                {
+                    _month = "0" + _month;
+                }
+                if (day < 10)
+                {
+                    _day = "0" + _day;
+                }
+                var ngayhoc = _day + "/" + _month + "/" + year;
+                <tbody>
+                    <tr class="user-select-none">
+                        <td>@i</td>
+                        <td>@ngayhoc</td>
+                        <td id="thoigian">@item.ThoiGian</td>
+                        <td>@item.SoLuongHocSinh</td>
+                        <td>@item.Vang</td>
+                        <td>@trangthai</td>
+                        <td class="col-2">
+                            <div class="d-flex">
+                                <a class="btn btn-success me-3  ms-3" id="edit" href="/Admin/DiemDanh/Edit/@item.MaBuoiHoc">
+                                    Điểm danh
+                                </a>
+                                <button class="btn btn-danger d-flex" id="delete" formaction="/Admin/BuoiHoc/Delete/@item.MaBuoiHoc">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        }
+
+    </table>
+
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage == 1)
+            {
+                <li class="page-item">
+                    <button class="page-link disabled" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </button>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <button class="page-link" formaction="/Admin/BuoiHoc/Index/?Page=@(ViewBag.CurrentPage-1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </button>
+                </li>
+            }
+
+            @{
+                int lenght = ViewBag.PageNumber;
+                for (int j = 1; j <= lenght; j++)
+                {
+                    if (ViewBag.CurrentPage == j)
+                    {
+                        <li class="page-item active"><button class="page-link" formaction="/Admin/BuoiHoc/Index/?Page=@j">@j</button></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><button class="page-link" formaction="/Admin/BuoiHoc/Index/?Page=@j">@j</button></li>
+                    }
+                }
+            }
+            @if (ViewBag.CurrentPage == ViewBag.PageNumber)
+            {
+                <li class="page-item">
+                    <button class="page-link disabled" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </button>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <button class="page-link" formaction="/Admin/BuoiHoc/Index/?Page=@(ViewBag.CurrentPage+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </button>
+                </li>
+            }
+
+        </ul>
+    </nav>
+
 </form>
 
 <form method="post" class="d-flex">
-    <button class="btn btn-primary d-flex mb-4 mt-3" onclick="return false" data-bs-toggle="modal" data-bs-target="#create" id="createBuoiHoc">
-        <div>Thêm buổi học</div>
-    </button>
     <div class="modal fade" id="create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -36,26 +162,71 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="col">
+                    <div class="col mb-2">
                         <label class="form-label" for="malophoc">Mã lớp học</label>
                         <input class="form-control" readonly name="malophoc" id="malophoc-create" />
                     </div>
-                    <div class="col">
+                    <div class="col mb-2">
                         <label class="form-label" for="tenlophoc">Tên lớp học</label>
                         <input class="form-control" readonly name="tenlophoc" id="tenlophoc-create" />
                     </div>
-                    <div class="col">
-                        <label class="form-label" for="ngayhoc">Ngày học</label>
-                        <input class="form-control" type="date" name="ngayhoc" id="ngayhoc" />
+                    <div class="col mb-2">
+                        <label class="form-label" for="luachon">Tùy chọn</label>
+                        <select class="form-select" name="luachon" id="luachon">
+                            <option value="1" selected>Thêm một buổi</option>
+                            <option value="2">Thêm nhiều buổi</option>
+                        </select>
                     </div>
-                    <div class="col">
+                    
+                    <div class="col mb-2">
+                        <div>
+                            <label class="form-label" for="ngayhoc">Ngày học</label>
+                            <input class="form-control mb-1" type="date" name="ngayhoc" id="ngayhoc" />
+                            <input class="form-control visually-hidden" type="date" name="ngayhoc1" id="ngayhoc1" />
+                        </div>
+                    </div>
+
+                    <div class="col mb-2 visually-hidden" id="chonthu">
+                        <label class="form-label">Chọn ngày trong tuần</label>
+                        <div class="d-flex flex-wrap gap-4" >
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu2" type="checkbox" value="false" id="thu2">
+                                <label class="form-check-label" for="thu2">Thứ 2</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu3" type="checkbox" value="false" id="thu3">
+                                <label class="form-check-label" for="thu3">Thứ 3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu4" type="checkbox" value="false" id="thu4">
+                                <label class="form-check-label" for="thu4">Thứ 4</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu5" type="checkbox" value="false" id="thu5">
+                                <label class="form-check-label" for="thu5">Thứ 5</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu6" type="checkbox" value="false" id="thu6">
+                                <label class="form-check-label" for="thu6">Thứ 6</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu7" type="checkbox" value="false" id="thu7">
+                                <label class="form-check-label" for="thu7">Thứ 7</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="thu8" type="checkbox" value="false" id="thu8">
+                                <label class="form-check-label" for="thu8">Chủ nhật</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col mb-2">
                         <label class="form-label" for="thoigian">Thời gian</label>
                         <div class="d-flex">
                             <input class="form-control" type="time" id="thoigian-bd" />
                             <input class="form-control" type="time" id="thoigian-kt" />
                             <input name="thoigian" id="thoigian-input" class="visually-hidden" />
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -67,74 +238,6 @@
     </div>
 </form>
 
-<div class="d-flex justify-content-end">
-    <label class="col-2">Mã lớp học: <span id="malophoc-span">@ViewBag.MaLopHoc</span></label>
-    <label class="col-2">Tên lớp học: <span id="tenlophoc-span">@ViewBag.TenLopHoc</span></label>
-    <label class="col-2">Giáo viên: <span id="tengiaovien-span">@ViewBag.TenGiaoVien</span></label>
-</div>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Ngày học</th>
-            <th scope="col">Thời gian</th>
-            <th scope="col">Số lượng học sinh</th>
-            <th scope="col">Vắng</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    @{
-        int i = 0;
-        foreach (var item in Model)
-        {
-            i++;
-            var trangthai = "Chưa học";
-            if (item.NgayHoc < DateTime.Now)
-            {
-                trangthai = "Đã học";
-            }
-            var year = item.NgayHoc.Year.ToString();
-            var month = item.NgayHoc.Month;
-            var day = item.NgayHoc.Day;
-            var _month = month.ToString();
-            var _day = day.ToString();
-            if (month<10)
-            {
-                _month = "0" + _month;
-            }
-            if (day < 10)
-            {
-                _day = "0" + _day;
-            }
-            var ngayhoc = _day + "/" + _month + "/" + year;
-            <tbody>
-                <tr class="user-select-none">
-                    <td>@i</td>
-                    <td>@ngayhoc</td>
-                    <td id="thoigian">@item.ThoiGian</td>
-                    <td>@item.SoLuongHocSinh</td>
-                    <td>@item.Vang</td>
-                    <td>@trangthai</td>
-                    <td class="col-2">
-                        <div class="d-flex">
-                            <a class="btn btn-success me-3  ms-3" id="edit" href="/Admin/DiemDanh/Edit/@item.MaBuoiHoc">
-                                Điểm danh
-                            </a>
-                            <form action="/Admin/BuoiHoc/Delete/@item.MaBuoiHoc" method="post">
-                                <button class="btn btn-danger d-flex" id="delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        }
-    }
-
-</table>
 
 @section Scripts{
     <script>
@@ -161,9 +264,30 @@
                 const _x = x.split(":")
                 const _y = y.split(":")
                 $("#thoigian-input").val(_x[0] + "h" + _x[1] + "-" + _y[0] + "h" + _y[1])
-                console.log($("#thoigian-input").val())
             })
-            
+
+            $("#chonthu input").click(function () {
+                var value = $(this).val()
+                if (value == "false") {
+                    $(this).val("true")
+                }
+                else {
+                    $(this).val("false")
+                }
+            })
+
+            $("#luachon").change(function () {
+                console.log($(this).val())
+                if ($(this).val() == "1") {
+                    $("#chonthu").addClass("visually-hidden")
+                    $("#ngayhoc1").addClass("visually-hidden")
+                }
+                else if ($(this).val() == "2"){
+                    $("#chonthu").removeClass("visually-hidden")
+                    $("#ngayhoc1").removeClass("visually-hidden")
+                }
+            })
+
         })
     </script>
 }

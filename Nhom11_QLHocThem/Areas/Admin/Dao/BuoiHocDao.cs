@@ -17,8 +17,9 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
         public static List<BuoiHoc> GetBuoiHocByMaLop(string malophoc)
         {
             connection = Connection.GetConnection();
-            string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, bh.Vang"+
+            string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, lh.SoLuongHocSinh, bh.Vang"+
                                   " FROM BuoiHoc bh"+
+                                  " JOIN LopHoc lh ON bh.MaLopHoc=lh.MaLopHoc" +
                                   " WHERE bh.MaLopHoc = @malophoc";
 
             List<BuoiHoc> buoihoc = new List<BuoiHoc>();
@@ -121,21 +122,35 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
         public static List<BuoiHoc> SearchBuoiHoc(FormCollection collection)
         {
             var malophoc = collection["malophoc"];
-
+            var tengiaovien = collection["tengiaovien"];
             connection = Connection.GetConnection();
-            SqlCommand command;
-            if (malophoc != "" && malophoc != null)
+            SqlCommand command = null;
+            string queryString;
+            if (malophoc != "" && malophoc != null || tengiaovien != null && tengiaovien != "")
             {
-                string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, bh.Vang" +
+                if(malophoc!="")
+                {
+                    queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, lh.SoLuongHocSinh, bh.Vang" +
                                   " FROM BuoiHoc bh" +
+                                  " JOIN LopHoc lh ON bh.MaLopHoc=lh.MaLopHoc" +
                                   " WHERE bh.MaLopHoc = @malophoc";
-                command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@malophoc", malophoc);
+                    command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@malophoc", malophoc);
+                }
+                else
+                {
+                    queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, lh.SoLuongHocSinh, bh.Vang" +
+                                  " FROM BuoiHoc bh JOIN GiaoVien gv ON bh.MaGiaoVien=gv.MaGiaoVien" +
+                                  " JOIN LopHoc lh ON bh.MaLopHoc=lh.MaLopHoc" +
+                                  " WHERE gv.TenGiaoVien like @tengiaovien";
+                    command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@tengiaovien", tengiaovien);
+                }
             }
             else
             {
-                string queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, bh.Vang" +
-                                  " FROM BuoiHoc bh";
+                queryString = "SELECT bh.MaBuoiHoc, bh.NgayHoc, lh.SoLuongHocSinh, bh.ThoiGian, bh.Vang" +
+                               " FROM BuoiHoc bh JOIN LopHoc lh ON bh.MaLopHoc = lh.MaLopHoc";
                 command = new SqlCommand(queryString, connection);
             }
 

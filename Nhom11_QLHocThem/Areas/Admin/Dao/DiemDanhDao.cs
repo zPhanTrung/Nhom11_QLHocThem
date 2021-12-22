@@ -55,9 +55,10 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
         public static List<DiemDanhView> GetBangDiemDanh(int mabuoihoc)
         {
             connection = Connection.GetConnection();
-            string queryString = "SELECT bh.NgayHoc, bh.ThoiGian, bh.SoLuongHocSinh, hs.MaHocSinh, hs.TenHocSinh, hs.NgaySinh, dd.TichVang, dd.GhiChu"+
+            string queryString = "SELECT bh.NgayHoc, bh.ThoiGian, lh.SoLuongHocSinh, hs.MaHocSinh, hs.TenHocSinh, hs.NgaySinh, dd.TichVang, dd.GhiChu"+
                                    " FROM BuoiHoc bh JOIN DiemDanh dd ON bh.MaBuoiHoc = dd.MaBuoiHoc AND bh.MaBuoiHoc = @mabuoihoc"+
-                                                    " JOIN HocSinh hs ON hs.MaHocSinh = dd.MaHocSinh";
+                                                    " JOIN HocSinh hs ON hs.MaHocSinh = dd.MaHocSinh" +
+                                                    " JOIN LopHoc lh ON bh.MaLopHoc=lh.MaLopHoc";
             List<DiemDanhView> diemdanh = new List<DiemDanhView>();
             SqlCommand command = new SqlCommand(queryString, connection);
             command.Parameters.AddWithValue("@mabuoihoc", mabuoihoc);

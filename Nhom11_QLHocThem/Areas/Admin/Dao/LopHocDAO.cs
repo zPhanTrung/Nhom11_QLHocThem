@@ -13,11 +13,15 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
     public class LopHocDao
     {
         private static SqlConnection connection;
-        public static List<LopHoc> GetAllLopHoc()
+        public static List<LopHoc_View> GetAllLopHoc()
         {
             connection = Connection.GetConnection();
-            string queryString = "SELECT * FROM LopHoc";
-            List<LopHoc> lophocs = new List<LopHoc>();
+            string queryString = "SELECT lh.MaLopHoc, lh.TenLopHoc, gv.TenGiaoVien, lh.NgayBatDau, lh.NgayKetThuc," + 
+                                    "lh.SoLuongHocSinh, lh.HocPhi1Buoi, mh.TenMonHoc"+
+                                  " FROM LopHoc lh"+
+                                  " JOIN GiaoVien gv ON lh.MaGiaoVien = gv.MaGiaoVien"+
+                                  " JOIN MonHoc mh ON gv.MaMonHoc = mh.MaMonHoc";    
+            List<LopHoc_View> lophocs = new List<LopHoc_View>();
             SqlCommand command = new SqlCommand(queryString, connection);
             try
             {
@@ -26,8 +30,8 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
 
                 while (reader.Read())
                 {
-                    Type type = typeof(LopHoc);
-                    LopHoc obj = (LopHoc)Activator.CreateInstance(type);
+                    Type type = typeof(LopHoc_View);
+                    LopHoc_View obj = (LopHoc_View)Activator.CreateInstance(type);
                     PropertyInfo[] properties = obj.GetType().GetProperties();
 
                     foreach (PropertyInfo property in properties)

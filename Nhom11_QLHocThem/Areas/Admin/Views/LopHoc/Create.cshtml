@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Thêm lớp học</h3>
+
+<form method="post" action="/Admin/LopHoc/Create" class="mt-5">
+    <div class="container d-flex flex-column">
+        <div class="d-flex row g-3">
+            <div class="col-2">
+                <label class="form-label" for="mahocsinh">Mã Lớp học</label>
+                <input class="form-control" name="mahocsinh" id="mahocsinh" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="tenhocsinh">Tên lớp học</label>
+                <input class="form-control" name="tenhocsinh" id="tenhocsinh" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="ngaybatdau">Ngày bắt đầu</label>
+                <input class="form-control" type="date" name="ngaybatdau" id="ngaybatdau" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="ngayketthuc">Ngày kết thúc</label>
+                <input class="form-control" type="date" name="ngayketthuc" id="ngayketthuc" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="ngaybatdau-dangky">Ngày bắt đầu đăng ký</label>
+                <input class="form-control" type="date" name="ngaybatdau-dangky" id="ngaybatdau-dangky" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="ngayketthuc-dangky">Ngày kết thúc đăng ký</label>
+                <input class="form-control" type="date" name="ngayketthuc-dangky" id="ngayketthuc-dangky" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="hocphi1buoi">Học phí 1 buổi</label>
+                <input class="form-control" name="hocphi1buoi" id="hocphi1buoi" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="giaovien">Giáo viên</label>
+                <input class="form-control" name="giaovien" id="giaovien" />
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="monhoc">Môn học</label>
+                <input class="form-control" name="monhoc" id="monhoc" />
+            </div>
+
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-secondary" onclick="window.history">Quay lại</button>
+            <button class="btn btn-primary mx-3" formaction="/Admin/HocSinh/Create">Thêm</button>
+        </div>
+
+
+    </div>
+
+    
+</form>

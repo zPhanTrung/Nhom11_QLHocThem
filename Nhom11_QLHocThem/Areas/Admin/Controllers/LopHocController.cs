@@ -13,8 +13,20 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         // GET: Admin/LopHoc
         public ActionResult Index()
         {
-            List<LopHoc> lst = LopHocDAO.GetAllClass();
-            return View(lst);
+            List<LopHoc_View> model = LopHocDao.GetAllLopHoc();
+            return View(model);
+        }
+
+        public ActionResult Create()
+        {
+            
+            return View();
+        }
+
+        public ActionResult Edit(int? id)
+        {
+
+            return View();
         }
     }
 }

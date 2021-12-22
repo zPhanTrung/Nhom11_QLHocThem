@@ -34,9 +34,10 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             List<DiemDanhView> model = DiemDanhDao.GetBangDiemDanh(id);
             ViewBag.MaLopHoc = BuoiHocDao.FindById(id).MaLopHoc;
-            LopHoc lophoc = LopHocDao.GetLopHoc(ViewBag.MaLopHoc);
+            LopHoc lophoc = LopHocDao.GetLopHocByMaLop(ViewBag.MaLopHoc);
             ViewBag.TenLopHoc = lophoc.TenLopHoc;
             ViewBag.TenGiaoVien = GiaoVienDao.GetGiaoVien(lophoc.MaGiaoVien).TenGiaoVien;
+            ViewBag.SoLuongHocSinh = lophoc.SoLuongHocSinh;
             ViewBag.MaBuoiHoc = id;
             return View(model);
         }
