@@ -78,6 +78,46 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
             return true;
         }
 
+        public static bool InsertNhieuBuoiHoc(FormCollection collection)
+        {
+            connection = Connection.GetConnection();
+            connection.Open();
+
+            var ngaybatdau = collection["ngayhoc"];
+            var ngayketthuc = collection["ngayhoc1"];
+            var dt_ngaybatdau = DateTime.Parse(ngaybatdau);
+            var dt_ngayketthuc = DateTime.Parse(ngayketthuc);
+            DateTime currentDate = dt_ngaybatdau;
+            while (currentDate <= dt_ngayketthuc)
+            {
+                var dayOfWeek = (int)currentDate.DayOfWeek + 1;
+                foreach (string key in collection.AllKeys)
+                {
+                    if (key.Contains("thu"))
+                    {
+                        var index = int.Parse(key.Substring(3, 1));
+                        if (dayOfWeek == index)
+                        {
+                            SqlCommand command = new SqlCommand("ThemBuoiHoc", connection);
+                            command.CommandType = CommandType.StoredProcedure;
+
+                            var vang = 0;
+                            command.Parameters.AddWithValue("@NgayHoc", currentDate);
+                            command.Parameters.AddWithValue("@ThoiGian", collection["thoigian"]);
+                            command.Parameters.AddWithValue("@Vang", vang);
+                            command.Parameters.AddWithValue("@MaLopHoc", collection["malophoc"]);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                currentDate = currentDate.AddDays(1);               
+            }
+
+            connection.Close();
+            return true;
+        }
+
         public static BuoiHoc FindById(int mabuoihoc)
         {
             connection = Connection.GetConnection();
