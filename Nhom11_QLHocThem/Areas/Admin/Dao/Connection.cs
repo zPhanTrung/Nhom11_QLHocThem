@@ -9,7 +9,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
     public class Connection
     {
         private static string ConnectionString =
-            "Data Source=LAPTOP-EU12CATM\\SQLEXPRESS;Initial Catalog=QL_HocThem;Integrated Security=True;";
+            "Data Source=LAPTOP-LOVKU60P\\SQLEXPRESS;Initial Catalog=QL_HocThem;Integrated Security=True;";
                                                     
         private static SqlConnection connection;
 

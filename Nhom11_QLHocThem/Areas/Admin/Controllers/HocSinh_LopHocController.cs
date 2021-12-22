@@ -38,28 +38,28 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
                 var mahocsinh = collection["mahocsinh"];
                 var malophoc = collection["malophoc"];
                 var dangky = collection["dangky"];
-                int i_dangky = -1;
+                bool i_dangky = false;
                 if (dangky == "true")
-                    i_dangky = 1;
+                    i_dangky = true;
                 else
-                    i_dangky = 0;
+                    i_dangky = false;
                 connection = Connection.GetConnection();
 
                 connection.Open();
-                string query = "EXEC dangKyHoc @MaLopHoc @MaHocSinh @DangKy";
+                string query = "EXEC dangKyHoc @MaLopHoc, @MaHocSinh, @DangKy";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@MaHocSinh", collection["mahocsinh"]);
                 command.Parameters.AddWithValue("@MaLopHoc", collection["malophoc"]);
                 command.Parameters.AddWithValue("@DangKy", i_dangky);
-                command.ExecuteNonQuery();
+                var rs = command.ExecuteNonQuery();
                 connection.Close();
 
                 return Redirect("/DangKy/");
             }
             catch
             {
-                return View();
+                return Redirect("/Dangky/");
             }
         }
 

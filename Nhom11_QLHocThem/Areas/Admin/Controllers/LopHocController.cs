@@ -16,7 +16,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             List<LopHoc_View> model = LopHocDao.GetAllLopHoc();
             return View(model);
         }
-
+        
         public ActionResult Create()
         {
             

@@ -26,10 +26,10 @@
                             @item.NgayKetThuc.ToShortDateString()
                         </p>
 
-                        <form action="/Admin/HocSinh_LopHoc/Create" method="post">
+                        <form action="/Admin/HocSinh_LopHoc/create" method="post">
                             <input type="hidden" name="malophoc" value="@item.MaLopHoc" />
                             <input type="hidden" name="mahocsinh" value="@ViewBag.MaHS" />
-                            <input type="hidden" name="dangky" value="" />
+                            <input type="hidden" name="dangky" value="true" />
                             @foreach (var x in ViewBag.LopDaDangKy)
                             {
                                 if (x.MaLopHoc == item.MaLopHoc)
@@ -42,7 +42,7 @@
                                         Hủy đăng ký
                                     </button>
 
-                                    break;
+                                    break ;
                                 }
                                 else
                                 {
@@ -53,7 +53,7 @@
                                         Hủy đăng ký
                                     </button>
 
-                                    break;
+                                    break ;
                                 }
 
                             }
@@ -71,10 +71,11 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $("dangky").click(function () {
+            console.log("ready")
+            $("button#dangky").click(function () {
                 $("#dangky").val("true")
             })
-            $("huydangky").click(function () {
+            $("buttonhuy#huydangky").click(function () {
                 $("#dangky").val("false")
             })
         })
