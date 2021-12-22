@@ -47,22 +47,33 @@
                 <div class="form-group">
                     <label for="mamonhoc">Môn học</label>
                     <select class="form-control" id="mamonhoc" name="mamonhoc">
-                        <option value="1">Toán</option>
+                        @{ 
+                            foreach(var mh in ViewBag.ListMonHoc) { 
+                             <option value="@mh.MaMonHoc">@mh.TenMonHoc</option>
+                            }
+                        }
+                        @*<option value="1">Toán</option>
                         <option value="2">Văn</option>
                         <option value="3">Anh</option>
                         <option value="4">Lý</option>
                         <option value="5">Hóa</option>
                         <option value="6">Sinh</option>
                         <option value="7">Sử</option>
-                        <option value="8">Địa</option>
+                        <option value="8">Địa</option>*@
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="mamtt">Mức thanh toán</label>
                     <select class="form-control" id="mamtt" name="mamtt">
-                        <option value="1">MTT01</option>
+                        @{
+                            foreach (var mh in ViewBag.ListMTT)
+                            {
+                                <option value="@mh.MaMTT">@mh.TyLePhanTram</option>
+                            }
+                        }
+                        @*<option value="1">MTT01</option>
                         <option value="2">MTT02</option>
-                        <option value="3 ">MTT03</option>
+                        <option value="3 ">MTT03</option>*@
                     </select>
                 </div>
                 <div class="add mt-4">
