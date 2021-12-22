@@ -26,6 +26,10 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         // GET: Admin/GiaoVien/Create
         public ActionResult Create()
         {
+            var mhs = MonHocDao.GetAllMonHoc();
+            ViewBag.ListMonHoc = mhs;
+            var mtt = MonHocDao.GetAllMTT();
+            ViewBag.ListMTT = mtt;
             return View();
         }
 
