@@ -95,7 +95,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
         public static List<LopHoc> GetAllLopHoc2()
         {
             connection = Connection.GetConnection();
-            string queryString = "SELECT * FROM LOPHOC";
+            string queryString = "SELECT * FROM LopHoc";
             List<LopHoc> lophocs = new List<LopHoc>();
             SqlCommand command = new SqlCommand(queryString, connection);
             try

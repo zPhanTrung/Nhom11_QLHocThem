@@ -28,20 +28,30 @@ namespace Nhom11_QLHocThem.Controllers
             command.Parameters.AddWithValue("@TenDangNhap", collection["username"]);
             command.Parameters.AddWithValue("@MatKhau", collection["password"]);
             
-            var rs = command.ExecuteScalar();
+            var rs = command.ExecuteReader();
+            if(rs.HasRows)
+            {
+                if(rs.Read())
+                {
+                    var idnd = rs.GetInt32(0);
+                    string role = rs["VaiTro"].ToString();
+                    if (role == "user")
+                    {
+                        Session["hocsinhID"] = HocSinhDao.GetAllStudent().Where(s => s.IdNguoiDung.Equals(idnd)).FirstOrDefault().MaHocSinh;
 
-            if (rs != null)
-            {
-                int idnd = (int)rs;
-                Session["hocsinhID"] = HocSinhDao.GetAllStudent().Where(s=>s.IdNguoiDung.Equals(idnd)).FirstOrDefault().MaHocSinh;
-                connection.Close();
-                return Redirect("/DangKy/Index");
+                        connection.Close();
+                        return Redirect("/DangKy/Index");
+                    }
+                    else if(role=="admin")
+                    {
+                        connection.Close();
+                        return Redirect("/Admin/LopHoc");
+                    }
+                    
+                }
             }
-            else
-            {
-                connection.Close();
-                return Redirect("/Login/Index");
-            }
+            connection.Close();
+            return Redirect("/Login/Index");
         }
         // GET: Login/Details/5
         public ActionResult Details(int id)

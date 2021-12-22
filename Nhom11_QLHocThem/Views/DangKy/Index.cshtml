@@ -6,77 +6,78 @@
 }
 
 @*<h2>Index</h2>*@
-<div class="container">
-    <div class="">
 
-        <div class="d-flex flex-wrap mt-4">
-            @foreach (var item in Model)
-            {
-            <div class="p-3">
-                <div class="card" style="width: 18rem;">
-                    @*<img class="card-img-top" src="https://c3phuctho.edu.vn/uploads/news/2017_03/55d6c5306ecd9.jpeg"
-                         alt="Card image cap">*@
-                    <div class="card-body">
-                        <h5 class="card-title">@item.TenLopHoc</h5>
-                        <p class="card-text">
-                            Thời gian bắt đầu học:
-                            @item.NgayBatDau.ToShortDateString()
-                            <br />
-                            Kết thúc ngày:
-                            @item.NgayKetThuc.ToShortDateString()
-                        </p>
 
-                        <form action="/Admin/HocSinh_LopHoc/create" method="post">
-                            <input type="hidden" name="malophoc" value="@item.MaLopHoc" />
-                            <input type="hidden" name="mahocsinh" value="@ViewBag.MaHS" />
-                            <input type="hidden" name="dangky" value="true" />
-                            @foreach (var x in ViewBag.LopDaDangKy)
-                            {
-                                if (x.MaLopHoc == item.MaLopHoc)
-                                {
+    <div class="container">
+        <div class="">
 
-                                    <button style="display:none;" class="text-light btn btn-info btn-sm" id="dangky">
-                                        Đăng ký ngay
-                                    </button>
-                                    <button class="text-light btn btn-danger btn-sm" id="huydangky">
-                                        Hủy đăng ký
-                                    </button>
+            <div class="d-flex flex-wrap mt-4">
+                @foreach (var item in Model)
+                {
+                    <div class="p-3">
+                        <div class="card" style="width: 18rem;">
+                            @*<img class="card-img-top" src="https://c3phuctho.edu.vn/uploads/news/2017_03/55d6c5306ecd9.jpeg"
+                                alt="Card image cap">*@
+                            <div class="card-body">
+                                <h5 class="card-title">@item.TenLopHoc</h5>
+                                <p class="card-text">
+                                    Thời gian bắt đầu học:
+                                    @item.NgayBatDau.ToShortDateString()
+                                    <br />
+                                    Kết thúc ngày:
+                                    @item.NgayKetThuc.ToShortDateString()
+                                </p>
+                                <form action="/Admin/HocSinh_LopHoc/create" method="post">
+                                    <input type="hidden" name="malophoc" value="@item.MaLopHoc" />
+                                    <input type="hidden" name="mahocsinh" value="@ViewBag.MaHS" />
+                                    <input type="hidden" name="dangky" id="dangky" value="" />
+                                    @{
+                                        var len = ViewBag.LopDaDangKy.Count;
+                                        for (int j = 0; j < len; j++)
+                                        {
+                                            if (ViewBag.LopDaDangKy[j].MaLopHoc == item.MaLopHoc)
+                                            {
+                                                <button style="display:none;" class="text-light btn btn-info btn-sm" id="dangky">
+                                                    Đăng ký ngay
+                                                </button>
+                                                <button class="text-light btn btn-danger btn-sm" id="huydangky">
+                                                    Hủy đăng ký
+                                                </button>
+                                                break;
+                                            }
+                                            else if (j == len - 1)
+                                            {
+                                                <button class="text-light btn btn-info btn-sm" id="dangky">
+                                                    Đăng ký ngay
+                                                </button>
+                                                <button style="display:none;" class="text-light btn btn-danger btn-sm" id="huydangky">
+                                                    Hủy đăng ký
+                                                </button>
+                                            }
+                                        }
+                                    }
+                                </form>
 
-                                    break ;
-                                }
-                                else
-                                {
-                                    <button class="text-light btn btn-info btn-sm" id="dangky">
-                                        Đăng ký ngay
-                                    </button>
-                                    <button style="display:none;" class="text-light btn btn-danger btn-sm" id="huydangky">
-                                        Hủy đăng ký
-                                    </button>
-
-                                    break ;
-                                }
-
-                            }
-
-                        </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            }
+                }
 
-    </div>
-</div>
+            </div>
+        </div>
 
 
 @section scripts{
     <script>
         $(document).ready(function () {
-            console.log("ready")
+
             $("button#dangky").click(function () {
-                $("#dangky").val("true")
+                $("input#dangky").val("true")
+
+
             })
-            $("buttonhuy#huydangky").click(function () {
-                $("#dangky").val("false")
+            $("button#huydangky").click(function () {
+                $("input#dangky").val("false")
             })
         })
     </script>
