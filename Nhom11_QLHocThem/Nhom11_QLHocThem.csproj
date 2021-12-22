@@ -128,14 +128,19 @@
     <Compile Include="Areas\Admin\Controllers\DiemDanhController.cs" />
     <Compile Include="Areas\Admin\Controllers\GiaoVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\HocSinhController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LopHocController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MucThanhToanController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeLuongGiaoVienController.cs" />
     <Compile Include="Areas\Admin\Dao\BienLaiThuHPDao.cs" />
     <Compile Include="Areas\Admin\Dao\BienLaiTraLuongDao.cs" />
     <Compile Include="Areas\Admin\Dao\BuoiHocDao.cs" />
     <Compile Include="Areas\Admin\Dao\Connection.cs" />
+    <Compile Include="Areas\Admin\Dao\DangKyDao.cs" />
     <Compile Include="Areas\Admin\Dao\DiemDanhDao.cs" />
     <Compile Include="Areas\Admin\Dao\GiaoVienDao.cs" />
     <Compile Include="Areas\Admin\Dao\HocSinhDao.cs" />
     <Compile Include="Areas\Admin\Dao\LopHocDao.cs" />
+    <Compile Include="Areas\Admin\Dao\ThongKeDao.cs" />
     <Compile Include="Areas\Admin\Model\BienLaiThuHP.cs" />
     <Compile Include="Areas\Admin\Model\BienLaiTraLuong.cs" />
     <Compile Include="Areas\Admin\Model\BuoiHoc.cs" />
@@ -147,6 +152,7 @@
     <Compile Include="Areas\Admin\Model\DTO\BuoiHoc_DiemDanhView.cs" />
     <Compile Include="Areas\Admin\Model\DTO\CTTraLuong_LopHoc.cs" />
     <Compile Include="Areas\Admin\Model\DTO\DiemDanhView.cs" />
+    <Compile Include="Areas\Admin\Model\DTO\ThongKeLuong_GiaoVienView.cs" />
     <Compile Include="Areas\Admin\Model\GiaoVien.cs" />
     <Compile Include="Areas\Admin\Model\HocSinh_LopHoc.cs" />
     <Compile Include="Areas\Admin\Model\LopHoc.cs" />
@@ -156,7 +162,9 @@
     <Compile Include="Areas\Admin\Model\MucThanhToan.cs" />
     <Compile Include="Areas\Admin\Model\NguoiDung.cs" />
     <Compile Include="Areas\Admin\Model\NienKhoa.cs" />
+    <Compile Include="Controllers\DangKyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MyCoursesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,6 +205,11 @@
     <Content Include="Areas\Admin\Views\BienLaiTraLuong\Create.cshtml" />
     <Content Include="Areas\Admin\Views\GiaoVien\Create.cshtml" />
     <Content Include="Areas\Admin\Views\BienLaiTraLuong\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\GiaoVien\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MucThanhToan\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeLuongGiaoVien\ThongKeLuong.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeLuongGiaoVien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeLuongGiaoVien\Index2.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -222,6 +235,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\DangKy\Index.cshtml" />
+    <Content Include="Views\MyCourses\Index.cshtml" />
+    <Content Include="Views\DangKy\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

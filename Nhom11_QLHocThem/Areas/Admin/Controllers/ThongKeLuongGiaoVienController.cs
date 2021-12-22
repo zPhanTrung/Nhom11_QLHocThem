@@ -1,5 +1,4 @@
 ﻿using Nhom11_QLHocThem.Areas.Admin.Dao;
-using Nhom11_QLHocThem.Areas.Admin.Model;
 using Nhom11_QLHocThem.Areas.Admin.Model.DTO;
 using System;
 using System.Collections.Generic;
@@ -9,35 +8,55 @@ using System.Web.Mvc;
 
 namespace Nhom11_QLHocThem.Areas.Admin.Controllers
 {
-    public class BienLaiTraLuongController : Controller
+    public class ThongKeLuongGiaoVienController : Controller
     {
-        // GET: Admin/BienLaiTraLuong
+        // GET: Admin/ThongKeLuongGiaoVien
         public ActionResult Index()
         {
-            List<BLTraLuong_GiaoVien> ds_bienlaitraluong = BienLaiTraLuongDao.GetAllBienLaiTraLuong();
-            return View(ds_bienlaitraluong);
+            return View();
+        }
+        public ActionResult Index2()
+        {
+            return View();
+        }
+        public ActionResult ThongKeLuong()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ThongKeLuong(FormCollection collection)
+        {
+            try
+            {
+                List<ThongKeLuong_GiaoVienView> thongkeluong = ThongKeDao.GetThongKeLuong_GiaoVienView(collection);
+
+                return View(thongkeluong);
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
-        // GET: Admin/BienLaiTraLuong/Details/5
+        // GET: Admin/ThongKeLuongGiaoVien/Details/5
         public ActionResult Details(int id)
         {
-            List<CTTraLuong_LopHoc> ct_bienlaitraluong = BienLaiTraLuongDao.GetBienLaiTraLuong(id);
-            return View(ct_bienlaitraluong);
+            return View();
         }
 
-        // GET: Admin/BienLaiTraLuong/Create
+        // GET: Admin/ThongKeLuongGiaoVien/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/BienLaiTraLuong/Create
+        // POST: Admin/ThongKeLuongGiaoVien/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
-                BienLaiTraLuongDao.InsertBienLaiTraLuong(collection);
+                // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
@@ -47,13 +66,13 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/BienLaiTraLuong/Edit/5
+        // GET: Admin/ThongKeLuongGiaoVien/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/BienLaiTraLuong/Edit/5
+        // POST: Admin/ThongKeLuongGiaoVien/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -69,13 +88,19 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/BienLaiTraLuong/Delete/5
-        [HttpPost]
+        // GET: Admin/ThongKeLuongGiaoVien/Delete/5
         public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Admin/ThongKeLuongGiaoVien/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                BienLaiTraLuongDao.DeleteBLTraLuong(id);
+                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

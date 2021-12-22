@@ -46,9 +46,11 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         }
 
         // GET: Admin/GiaoVien/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            string ID = id.ToString();
+            GiaoVien giaoVien = GiaoVienDao.GetGiaoVien(ID);
+            return View(giaoVien);
         }
 
         // POST: Admin/GiaoVien/Edit/5
@@ -57,7 +59,7 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                GiaoVienDao.UpdateGiaoVien(collection);
 
                 return RedirectToAction("Index");
             }
@@ -67,19 +69,14 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/GiaoVien/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: Admin/GiaoVien/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id)
         {
             try
             {
-                // TODO: Add delete logic here
+                GiaoVienDao.DeleteGiaoVien(id);
 
                 return RedirectToAction("Index");
             }

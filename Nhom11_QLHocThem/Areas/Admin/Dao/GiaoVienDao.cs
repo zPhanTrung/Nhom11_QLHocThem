@@ -118,6 +118,45 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
             return true;
         }
 
+        public static bool UpdateGiaoVien(FormCollection collection)
+        {
+            connection = Connection.GetConnection();
+
+            connection.Open();
+            SqlCommand command = new SqlCommand("P_UpdateGiaoVien", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@MaGiaoVien", collection["magiaovien"]);
+            command.Parameters.AddWithValue("@TenGiaoVien", collection["tengiaovien"]);
+            command.Parameters.AddWithValue("@NgaySinh", collection["ngaysinh"]);
+            command.Parameters.AddWithValue("@GioiTinh", collection["gioitinh"]);
+            command.Parameters.AddWithValue("@DiaChi", collection["diachi"]);
+            command.Parameters.AddWithValue("@SDT", collection["sdt"]);
+            command.Parameters.AddWithValue("@MaMonHoc", collection["mamonhoc"]);
+            command.Parameters.AddWithValue("@MaMTT", collection["mamtt"]);
+
+            if (collection["taikhoan"] != "")
+                command.Parameters.AddWithValue("@TaiKhoanNganHang", collection["sdt"]);
+
+            int rs = command.ExecuteNonQuery();
+            connection.Close();
+            if (rs > 0)
+                return false;
+            return true;
+        }
+        public static void DeleteGiaoVien(string magiaovien)
+        {
+            connection = Connection.GetConnection();
+
+            connection.Open();
+            string query = "EXEC P_DeleteGiaoVien @MaGiaoVien";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@MaGiaoVien", magiaovien);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 
 

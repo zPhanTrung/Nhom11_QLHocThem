@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mức thanh toán</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form action="">
+                <div class="form-group">
+                    <label for="tylephantram">Tỷ lệ:</label>
+                    <input type="number" class="form-control" id="tylephantram" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="trinhdo">Trình độ:</label>
+                    <input type="text" class="form-control" id="trinhdo" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="kinhnghiem">Kinh nghiệm:</label>
+                    <input type="text" class="form-control" id="kinhnghiem" placeholder="">
+                </div>
+                <div class="add mt-4">
+                    <button type="submit" class="btn btn-primary mb-2">Thêm</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <div class="">
+                <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tỷ lệ phần trăm</th>
+                            <th scope="col">Trình độ</th>
+                            <th scope="col">Kinh nghiệm</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>75%</td>
+                            <td>LH01</td>
+                            <td>3</td>
+                            <td class="text-info">Sửa</td>
+                            <td class="text-info">Xóa</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>80%</td>
+                            <td>LH02</td>
+                            <td>4</td>
+                            <td class="text-info">Sửa</td>
+                            <td class="text-info">Xóa</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>85%</td>
+                            <td>LH03</td>
+                            <td>2</td>
+                            <td class="text-info">Sửa</td>
+                            <td class="text-info">Xóa</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

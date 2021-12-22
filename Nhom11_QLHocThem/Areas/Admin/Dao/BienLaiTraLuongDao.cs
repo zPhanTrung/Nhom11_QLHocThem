@@ -114,5 +114,19 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
                 return false;
             return true;
         }
+
+        public static void DeleteBLTraLuong(int mabltraluong)
+        {
+            connection = Connection.GetConnection();
+
+            connection.Open();
+            string query = "EXEC P_DeleteBLTraLuong @MaBLTraLuong";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@MaBLTraLuong", mabltraluong);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 }

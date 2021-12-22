@@ -1,0 +1,35 @@
+﻿@using Nhom11_QLHocThem.Areas.Admin.Model
+@model List<LopHoc>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Index</h2>*@
+<div class="container">
+    <div class="">
+
+        <div class="d-flex flex-wrap mt-4">
+            @foreach (var item in Model)
+            {
+            <div class="p-3">
+                <div class="card" style="width: 18rem;">
+                    @*<img class="card-img-top" src="https://c3phuctho.edu.vn/uploads/news/2017_03/55d6c5306ecd9.jpeg"
+                         alt="Card image cap">*@
+                    <div class="card-body">
+                        <h5 class="card-title">@item.TenLopHoc</h5>
+                        <p class="card-text">
+                            Thời gian bắt đầu học:
+                            @item.NgayBatDau.ToShortDateString()
+                            <br />
+                            Kết thúc ngày:
+                            @item.NgayKetThuc.ToShortDateString()
+                        </p>
+                        <a href="#" class="btn btn-primary">Đăng ký ngay</a>
+                    </div>
+                </div>
+            </div>
+            }
+
+    </div>
+</div>
