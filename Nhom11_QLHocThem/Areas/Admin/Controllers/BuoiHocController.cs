@@ -42,9 +42,11 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            var x = collection["thu2"];
-
-            BuoiHocDao.InsertBuoiHoc(collection);
+            var luachon = collection["luachon"];
+            if(luachon=="1")
+                BuoiHocDao.InsertBuoiHoc(collection);
+            else if(luachon=="2")
+                BuoiHocDao.InsertNhieuBuoiHoc(collection);
 
             return RedirectToAction("Index");
         }
@@ -74,8 +76,6 @@ namespace Nhom11_QLHocThem.Areas.Admin.Controllers
         {
             try
             {
-
-
                 return RedirectToAction("Index");
             }
             catch
