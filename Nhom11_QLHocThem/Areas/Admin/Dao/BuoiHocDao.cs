@@ -118,5 +118,46 @@ namespace Nhom11_QLHocThem.Areas.Admin.Dao
 
             return buoihoc;
         }
+
+        public static List<ThongKeVangDTO> TKV()
+        {
+            connection = Connection.GetConnection();
+
+            string queryString = "select lh.TenLopHoc, sum(bh.Vang) as HSV " +
+                                 "from BuoiHoc bh inner join LopHoc lh on bh.MalopHoc = lh.MaLopHoc"+
+                                  "group by lh.TenLopHoc";
+
+            List<ThongKeVangDTO> list = new List<ThongKeVangDTO>();
+            SqlCommand command = new SqlCommand(queryString, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Type type = typeof(ThongKeVangDTO);
+                    ThongKeVangDTO obj = (ThongKeVangDTO)Activator.CreateInstance(type);
+                    PropertyInfo[] properties = obj.GetType().GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        try
+                        {
+                            var value = reader[property.Name];
+                            if (value != null)
+                                property.SetValue(obj, Convert.ChangeType(value.ToString(), property.PropertyType));
+                        }
+                        catch { }
+                    }
+                    list.Add(obj);
+                }
+                reader.Close();
+            }
+            catch
+            { }
+            return list;
+        }
+
     }
 }

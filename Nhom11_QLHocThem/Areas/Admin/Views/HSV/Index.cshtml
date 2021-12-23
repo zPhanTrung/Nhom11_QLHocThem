@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Nhom11_QLHocThem.Areas.Admin.Model.DTO.ThongKeVangDTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tổng số học sinh vắng qua các buổi học của từng lớp</h2>
+
+<table class="table">
+    <tr class="user-select-none">
+        <th>
+           Tên Lớp học
+        </th>
+        <th>
+            Tổng số học sinh vắng
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="user-select-none">
+        <td>
+            @Html.DisplayFor(modelItem => item.TenLopHoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HSV)
+        </td>>
+    </tr>
+}
+
+</table>
