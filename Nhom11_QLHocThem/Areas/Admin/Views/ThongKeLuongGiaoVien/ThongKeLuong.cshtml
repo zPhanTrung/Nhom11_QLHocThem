@@ -58,15 +58,31 @@
                         <td>@item.TyLePhanTram</td>
                         <td>@item.TongSoLop</td>
                         <td>@item.TongSoBuoi</td>
-                        <td>@item.thanhtien</td>
+                        <td class="intoMoney">@item.thanhtien</td>
                         <!-- <td class="text-info">Chi tiết</td> -->
                     </tr>
                 }
 
             </tbody>
         </table>
+<<<<<<< Updated upstream
         <h5 class="mt-4">Tổng tiền lương: 7500000 đ</h5>
+=======
+        <h5 class="mt-4">Tổng tiền lương: <span id="totalMoney"></span></h5>
+>>>>>>> Stashed changes
     </div>
 </div>
 
+<script>
+    const listIntoMoney = document.querySelectorAll('.intoMoney');
+    const totalMoney = document.querySelector('#totalMoney');
+    let total = 0;
 
+    listIntoMoney.forEach((intoMoney) => {
+        total += parseFloat(intoMoney.textContent);
+    })
+
+    console.log(total);
+
+    totalMoney.textContent = total;
+</script>
